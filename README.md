@@ -16,10 +16,11 @@ Pipeline raw→clean→mart dei dati statistici giudiziariali del Ministero dell
 | `durata-civile` | Durata media procedimenti civili per materia (SICID + SIECIC) | 2014–2025 |
 | `durata-penale-classi` | Distribuzione procedimenti penali per classe di tempo | 2014–2025 |
 | `durata-penale-medie` | Durata media penale per sezione, sede e distretto | 2014–2025 |
+| `monitoraggio-pnrr-giustizia` | Definiti e pendenti per sede con target PNRR (civile) | 2019–2026 |
 
 Fonte unica: XLSX/CSV snapshot annuali su `datiestatistiche.giustizia.it`. Il file contiene l'intera serie storica; `years: [2025]` è la chiave di snapshot del run.
 
-Intake aperti: monitoraggio PNRR (#3), mediazione civile (#4), OCC (#5), UCP (#6).
+Intake aperti: mediazione civile (#4), OCC (#5), UCP (#6).
 
 ## Uso
 
@@ -29,7 +30,7 @@ make run-all # run batch di tutti i dataset
 make clean   # pulizia out/
 ```
 
-Nota: `giustizia-penale-indicatori`, `giustizia-civile-indicatori` e `durata-civile` richiedono `TOOLKIT_ALLOW_SCRIPT_SOURCE=1` (già imposto in `make run-all`).
+Nota: `giustizia-penale-indicatori`, `giustizia-civile-indicatori`, `durata-civile` e `monitoraggio-pnrr-giustizia` richiedono `TOOLKIT_ALLOW_SCRIPT_SOURCE=1` (già imposto in `make run-all`).
 
 ## Contesto
 
