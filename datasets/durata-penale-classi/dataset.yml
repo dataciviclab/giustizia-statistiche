@@ -1,0 +1,66 @@
+# Candidate: durata-penale-classi (issue #2)
+# Fonte: Ministero della Giustizia - DG Statistica
+# URL: https://datiestatistiche.giustizia.it/it/durata_dei_procedimenti.page
+# File: Durate_penali_per_classi_20142025.csv (export CSV dello omonimo foglio XLSX)
+# Copertura: 2014-2025. Il CSV ha ~967k righe di padding vuoto (export artifact)
+#            — il clean filtra su anno non nullo. ~45k righe di dati.
+
+root: "../../out"
+schema_version: 1
+
+dataset:
+  name: "durata_penale_classi"
+  source_id: "giustizia_statistiche"
+  tags: [giustizia, penale, durata, classi-tempo, statistiche-giudiziarie]
+  category: giustizia
+  years: [2025]
+  time_coverage:
+    start_year: 2014
+    end_year: 2025
+
+raw:
+  output_policy: overwrite
+  sources:
+    - name: "durate_classi_csv"
+      type: "http_file"
+      args:
+        url: "https://datiestatistiche.giustizia.it/cmsresources/cms/documents/Durate_penali_per_classi_20142025.csv"
+        filename: "Durate_penali_per_classi_20142025.csv"
+      primary: true
+
+clean:
+  sql: "sql/clean.sql"
+  read:
+    source: auto
+    mode: latest
+    delim: ";"
+    encoding: "utf-8"
+    header: true
+  required_columns: [ufficio, distretto, sede, sezione_ufficio, classe_tempo, anno, definiti]
+  validate:
+    min_rows: 40000
+    not_null:
+      - anno
+      - ufficio
+      - classe_tempo
+
+mart:
+  tables:
+    - name: "durata_penale_classi"
+      sql: "sql/mart.sql"
+    - name: "mart_classi_sintesi"
+      sql: "sql/mart_classi_sintesi.sql"
+  required_tables:
+    - "durata_penale_classi"
+    - "mart_classi_sintesi"
+  validate:
+    table_rules:
+      durata_penale_classi:
+        primary_key: [anno, ufficio, distretto, sede, sezione_ufficio, classe_tempo]
+        min_rows: 40000
+      mart_classi_sintesi:
+        primary_key: [anno, distretto, ufficio, classe_tempo]
+        min_rows: 1000
+
+validation:
+  fail_on_error: true
