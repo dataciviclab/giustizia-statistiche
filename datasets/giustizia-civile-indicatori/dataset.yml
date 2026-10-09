@@ -1,0 +1,70 @@
+# Candidate: giustizia-civile-indicatori
+# Fonte: Ministero della Giustizia - Direzione Generale di Statistica e Analisi Organizzativa
+# URL: https://datiestatistiche.giustizia.it/page/it/clearance-rate-e-disposition-time-civile
+# File XLSX: Indicatori_Civili.xlsx (3 sheet: Tribunali e Corti d'Appello, Giudici di Pace, Tribunali per i Minorenni)
+# Script: unite_sheets_civili.py — scarica XLSX e unisce i 3 sheet in un unico CSV
+# Copertura: Tribunali/CA 2014-2025; GiP e Minorenni solo 2023-2025.
+
+root: "../../out"
+schema_version: 1
+
+dataset:
+  name: "giustizia_civile_indicatori"
+  source_id: "giustizia_statistiche"
+  tags: [giustizia, civile, clearance-rate, disposition-time, statistiche-giudiziarie]
+  category: giustizia
+  years: [2025]
+  time_coverage:
+    start_year: 2014
+    end_year: 2025
+
+raw:
+  output_policy: overwrite
+  sources:
+    - type: script
+      args:
+        command: "python scripts/unite_sheets_civili.py --output raw_input.csv"
+        output: "raw_input.csv"
+        filename: "raw_input.csv"
+      primary: true
+
+clean:
+  read:
+    source: auto
+    mode: latest
+    delim: ","
+    encoding: "utf-8"
+    header: true
+    skip: 0
+    # Materia contiene virgole/virgolette (es. "R.D. ... n. 1.404, art.25 bis")
+    quote: "\""
+    escape: "\""
+  sql: "sql/clean.sql"
+  required_columns: [anno, tipo_ufficio, sede, macromateria, materia, clearance_rate, disposition_time_gg]
+  validate:
+    min_rows: 70000
+    not_null:
+      - anno
+      - tipo_ufficio
+      - sede
+
+mart:
+  tables:
+    - name: "giustizia_civile_indicatori"
+      sql: "sql/mart.sql"
+    - name: "mart_civile_trend"
+      sql: "sql/mart_civile_trend.sql"
+  required_tables:
+    - "giustizia_civile_indicatori"
+    - "mart_civile_trend"
+  validate:
+    table_rules:
+      giustizia_civile_indicatori:
+        primary_key: [anno, distretto, tipo_ufficio]
+        min_rows: 20
+      mart_civile_trend:
+        primary_key: [distretto, tipo_ufficio]
+        min_rows: 10
+
+validation:
+  fail_on_error: true
