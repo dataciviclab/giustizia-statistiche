@@ -5,6 +5,199 @@
   "updated_at": "2026-10-09",
   "datasets": [
     {
+      "slug": "civile_flussi",
+      "name": "Civile Flussi",
+      "description": "",
+      "source": "",
+      "source_id": "giustizia_statistiche",
+      "period": {
+        "start": 2014,
+        "end": 2025
+      },
+      "tags": [
+        "giustizia",
+        "statistiche-giudiziarie"
+      ],
+      "category": "giustizia",
+      "columns": [
+        {
+          "name": "anno",
+          "type": "INTEGER",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "year"
+        },
+        {
+          "name": "fonte",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "tipo_ufficio",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "distretto",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "sede",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "macromateria",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "materia",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "dettaglio",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "sopravvenuti",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "definiti_totale",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "definiti_con_sentenza",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "pendenti_finali",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        }
+      ],
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-clean/giustizia-statistiche/civile_flussi/2025/civile_flussi_2025_clean.parquet",
+        "multi_file": false
+      },
+      "stage": "incubating",
+      "mart_refs": [
+        "civile_flussi__mart_summary"
+      ]
+    },
+    {
+      "slug": "durata_civile",
+      "name": "Durata Civile",
+      "description": "",
+      "source": "",
+      "source_id": "giustizia_statistiche",
+      "period": {
+        "start": 2014,
+        "end": 2025
+      },
+      "tags": [
+        "giustizia",
+        "civile",
+        "durata",
+        "siecic",
+        "sicid",
+        "statistiche-giudiziarie"
+      ],
+      "category": "giustizia",
+      "columns": [
+        {
+          "name": "registro",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "ripartizione",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "distretto",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "tipo_ufficio",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "sede",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "livello_aggregazione",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "materia",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "anno",
+          "type": "INTEGER",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "year"
+        },
+        {
+          "name": "definiti",
+          "type": "BIGINT",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "durata_media_gg",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        }
+      ],
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-clean/giustizia-statistiche/durata_civile/2025/durata_civile_2025_clean.parquet",
+        "multi_file": false
+      },
+      "stage": "incubating",
+      "mart_refs": [
+        "durata_civile__durata_civile",
+        "durata_civile__mart_nazionale_trend"
+      ]
+    },
+    {
       "slug": "durata_penale_classi",
       "name": "Durata Penale Classi",
       "description": "",
@@ -151,6 +344,316 @@
       ]
     },
     {
+      "slug": "giustizia_civile_indicatori",
+      "name": "Giustizia Civile Indicatori",
+      "description": "",
+      "source": "",
+      "source_id": "giustizia_statistiche",
+      "period": {
+        "start": 2014,
+        "end": 2025
+      },
+      "tags": [
+        "giustizia",
+        "civile",
+        "clearance-rate",
+        "disposition-time",
+        "statistiche-giudiziarie"
+      ],
+      "category": "giustizia",
+      "columns": [
+        {
+          "name": "anno",
+          "type": "INTEGER",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "year"
+        },
+        {
+          "name": "fonte",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "tipo_ufficio",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "distretto",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "sede",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "macromateria",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "materia",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "clearance_rate",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "disposition_time_gg",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        }
+      ],
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-clean/giustizia-statistiche/giustizia_civile_indicatori/2025/giustizia_civile_indicatori_2025_clean.parquet",
+        "multi_file": false
+      },
+      "stage": "incubating",
+      "mart_refs": [
+        "giustizia_civile_indicatori__giustizia_civile_indicatori",
+        "giustizia_civile_indicatori__mart_civile_trend"
+      ]
+    },
+    {
+      "slug": "giustizia_penale_indicatori",
+      "name": "Giustizia Penale Indicatori",
+      "description": "",
+      "source": "",
+      "source_id": "giustizia_statistiche",
+      "period": {
+        "start": 2014,
+        "end": 2025
+      },
+      "tags": [
+        "giustizia",
+        "statistiche-giudiziarie"
+      ],
+      "category": "giustizia",
+      "columns": [
+        {
+          "name": "anno",
+          "type": "INTEGER",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "year"
+        },
+        {
+          "name": "tipo_ufficio",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "distretto",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "sede",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "sezione",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "clearance_rate",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "disposition_time_gg",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        }
+      ],
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-clean/giustizia-statistiche/giustizia_penale_indicatori/2025/giustizia_penale_indicatori_2025_clean.parquet",
+        "multi_file": false
+      },
+      "stage": "incubating",
+      "mart_refs": [
+        "giustizia_penale_indicatori__giustizia_penale_indicatori",
+        "giustizia_penale_indicatori__mart_penale_trend"
+      ]
+    },
+    {
+      "slug": "intercettazioni",
+      "name": "Intercettazioni",
+      "description": "",
+      "source": "",
+      "source_id": "giustizia_statistiche",
+      "period": {
+        "start": 2014,
+        "end": 2025
+      },
+      "tags": [
+        "giustizia",
+        "statistiche-giudiziarie"
+      ],
+      "category": "giustizia",
+      "columns": [
+        {
+          "name": "anno",
+          "type": "INTEGER",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "year"
+        },
+        {
+          "name": "tipo_ufficio",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "distretto",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "tipologia_intercettazione",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "n_bersagli",
+          "type": "INTEGER",
+          "role": "metric",
+          "description": ""
+        }
+      ],
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-clean/giustizia-statistiche/intercettazioni/2025/intercettazioni_2025_clean.parquet",
+        "multi_file": false
+      },
+      "stage": "incubating",
+      "mart_refs": [
+        "intercettazioni__intercettazioni"
+      ]
+    },
+    {
+      "slug": "monitoraggio_mensile_civile",
+      "name": "Monitoraggio Mensile Civile",
+      "description": "",
+      "source": "",
+      "source_id": "giustizia_statistiche",
+      "period": {
+        "start": 2019,
+        "end": 2025
+      },
+      "tags": [
+        "giustizia",
+        "statistiche-giudiziarie"
+      ],
+      "category": "giustizia",
+      "columns": [
+        {
+          "name": "anno",
+          "type": "INTEGER",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "year"
+        },
+        {
+          "name": "mese",
+          "type": "INTEGER",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "month"
+        },
+        {
+          "name": "fonte",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "tipo_ufficio",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "distretto",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "sede",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "materia",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "iscritti",
+          "type": "INTEGER",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "definiti",
+          "type": "INTEGER",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "area",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "flag_dato",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        }
+      ],
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-clean/giustizia-statistiche/monitoraggio_mensile_civile/2025/monitoraggio_mensile_civile_2025_clean.parquet",
+        "multi_file": false
+      },
+      "stage": "incubating",
+      "mart_refs": [
+        "monitoraggio_mensile_civile__monitoraggio_mensile_civile"
+      ]
+    },
+    {
       "slug": "monitoraggio_pnrr_giustizia",
       "name": "Monitoraggio Pnrr Giustizia",
       "description": "",
@@ -271,6 +774,142 @@
       "mart_refs": [
         "monitoraggio_pnrr_giustizia__monitoraggio_pnrr_giustizia",
         "monitoraggio_pnrr_giustizia__mart_nazionale_trend"
+      ]
+    },
+    {
+      "slug": "penale_flussi",
+      "name": "Penale Flussi",
+      "description": "",
+      "source": "",
+      "source_id": "giustizia_statistiche",
+      "period": {
+        "start": 2014,
+        "end": 2025
+      },
+      "tags": [
+        "giustizia",
+        "statistiche-giudiziarie"
+      ],
+      "category": "giustizia",
+      "columns": [
+        {
+          "name": "anno",
+          "type": "INTEGER",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "year"
+        },
+        {
+          "name": "tipo_ufficio",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "sezione",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "distretto",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "sede",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "sopravvenuti",
+          "type": "INTEGER",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "definiti_totale",
+          "type": "INTEGER",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "pendenti_finali",
+          "type": "INTEGER",
+          "role": "metric",
+          "description": ""
+        }
+      ],
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-clean/giustizia-statistiche/penale_flussi/2025/penale_flussi_2025_clean.parquet",
+        "multi_file": false
+      },
+      "stage": "incubating",
+      "mart_refs": [
+        "penale_flussi__penale_flussi"
+      ]
+    },
+    {
+      "slug": "spese_giustizia",
+      "name": "Spese Giustizia",
+      "description": "",
+      "source": "",
+      "source_id": "giustizia_statistiche",
+      "period": {
+        "start": 2014,
+        "end": 2025
+      },
+      "tags": [
+        "giustizia",
+        "spese-giustizia",
+        "statistiche-giudiziarie"
+      ],
+      "category": "giustizia",
+      "columns": [
+        {
+          "name": "anno",
+          "type": "INTEGER",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "year"
+        },
+        {
+          "name": "distretto",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "tipo_spesa",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "dettaglio_tipo_spesa",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "importo",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        }
+      ],
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-clean/giustizia-statistiche/spese_giustizia/2025/spese_giustizia_2025_clean.parquet",
+        "multi_file": false
+      },
+      "stage": "incubating",
+      "mart_refs": [
+        "spese_giustizia__spese_giustizia",
+        "spese_giustizia__mart_nazionale_trend"
       ]
     }
   ],
@@ -455,18 +1094,26 @@
       "detail": "anno 2025 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20261009T194814Z_ef57bc88",
+        "run_id": "20261009T195345Z_3afb3d79",
         "year": 2025,
-        "status": "FAILED",
+        "status": "SUCCESS",
         "quality_score": {
-          "raw": 100
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "clean": 123203,
+          "mart": 324
         },
         "output_bytes": {
-          "raw": 6716220
+          "raw": 6716220,
+          "clean": 698682,
+          "mart": 5953
         },
-        "started_at": "2026-10-09T19:48:14.209504+00:00",
-        "finished_at": "2026-10-09T19:48:16.343642+00:00",
-        "duration_seconds": 2.134
+        "started_at": "2026-10-09T19:53:45.407479+00:00",
+        "finished_at": "2026-10-09T19:54:15.471440+00:00",
+        "duration_seconds": 30.064
       }
     },
     {
@@ -477,12 +1124,27 @@
       "detail": "anno 2025 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20261009T194816Z_20770834",
+        "run_id": "20261009T195415Z_471b1939",
         "year": 2025,
-        "status": "FAILED",
-        "started_at": "2026-10-09T19:48:16.366055+00:00",
-        "finished_at": "2026-10-09T19:48:18.737358+00:00",
-        "duration_seconds": 2.371
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 21840,
+          "clean": 21840,
+          "mart": 16920
+        },
+        "output_bytes": {
+          "raw": 2007960,
+          "clean": 129899,
+          "mart": 88920
+        },
+        "started_at": "2026-10-09T19:54:15.531188+00:00",
+        "finished_at": "2026-10-09T19:54:19.961182+00:00",
+        "duration_seconds": 4.43
       }
     },
     {
@@ -493,7 +1155,7 @@
       "detail": "anno 2025 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20261009T194820Z_d16da33d",
+        "run_id": "20261009T195421Z_5fdcb15a",
         "year": 2025,
         "status": "SUCCESS",
         "quality_score": {
@@ -511,9 +1173,9 @@
           "clean": 91075,
           "mart": 132950
         },
-        "started_at": "2026-10-09T19:48:20.961051+00:00",
-        "finished_at": "2026-10-09T19:48:24.349221+00:00",
-        "duration_seconds": 3.388
+        "started_at": "2026-10-09T19:54:21.853984+00:00",
+        "finished_at": "2026-10-09T19:54:24.769944+00:00",
+        "duration_seconds": 2.916
       }
     },
     {
@@ -524,7 +1186,7 @@
       "detail": "anno 2025 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20261009T194826Z_01f05f7d",
+        "run_id": "20261009T195426Z_b14b09db",
         "year": 2025,
         "status": "SUCCESS",
         "quality_score": {
@@ -542,9 +1204,9 @@
           "clean": 32417,
           "mart": 28415
         },
-        "started_at": "2026-10-09T19:48:26.536729+00:00",
-        "finished_at": "2026-10-09T19:48:29.528791+00:00",
-        "duration_seconds": 2.992
+        "started_at": "2026-10-09T19:54:26.824786+00:00",
+        "finished_at": "2026-10-09T19:54:29.634831+00:00",
+        "duration_seconds": 2.81
       }
     },
     {
@@ -555,12 +1217,27 @@
       "detail": "anno 2025 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20261009T194829Z_79ed9cd7",
+        "run_id": "20261009T195429Z_84191ac3",
         "year": 2025,
-        "status": "FAILED",
-        "started_at": "2026-10-09T19:48:29.587401+00:00",
-        "finished_at": "2026-10-09T19:48:31.568003+00:00",
-        "duration_seconds": 1.981
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 79834,
+          "clean": 76799,
+          "mart": 783
+        },
+        "output_bytes": {
+          "raw": 8213230,
+          "clean": 412620,
+          "mart": 25442
+        },
+        "started_at": "2026-10-09T19:54:29.692651+00:00",
+        "finished_at": "2026-10-09T19:54:36.951352+00:00",
+        "duration_seconds": 7.259
       }
     },
     {
@@ -571,12 +1248,27 @@
       "detail": "anno 2025 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20261009T194831Z_f61def1a",
+        "run_id": "20261009T195437Z_02a73886",
         "year": 2025,
-        "status": "FAILED",
-        "started_at": "2026-10-09T19:48:31.589757+00:00",
-        "finished_at": "2026-10-09T19:48:33.080709+00:00",
-        "duration_seconds": 1.491
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 10488,
+          "clean": 10478,
+          "mart": 1358
+        },
+        "output_bytes": {
+          "raw": 914617,
+          "clean": 134681,
+          "mart": 61152
+        },
+        "started_at": "2026-10-09T19:54:37.020853+00:00",
+        "finished_at": "2026-10-09T19:54:39.589422+00:00",
+        "duration_seconds": 2.569
       }
     },
     {
@@ -587,18 +1279,26 @@
       "detail": "anno 2025 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20261009T194833Z_3e3561de",
+        "run_id": "20261009T195440Z_68d75cb2",
         "year": 2025,
-        "status": "FAILED",
+        "status": "SUCCESS",
         "quality_score": {
-          "raw": 100
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "clean": 3952,
+          "mart": 1560
         },
         "output_bytes": {
-          "raw": 213981
+          "raw": 213981,
+          "clean": 8386,
+          "mart": 5418
         },
-        "started_at": "2026-10-09T19:48:33.498871+00:00",
-        "finished_at": "2026-10-09T19:48:34.331319+00:00",
-        "duration_seconds": 0.832
+        "started_at": "2026-10-09T19:54:40.072532+00:00",
+        "finished_at": "2026-10-09T19:54:41.344449+00:00",
+        "duration_seconds": 1.272
       }
     },
     {
@@ -609,18 +1309,26 @@
       "detail": "anno 2025 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20261009T194834Z_a703fca9",
+        "run_id": "20261009T195441Z_4b00e1da",
         "year": 2025,
-        "status": "FAILED",
+        "status": "SUCCESS",
         "quality_score": {
-          "raw": 100
+          "raw": 100,
+          "clean": 95,
+          "mart": 100
+        },
+        "output_rows": {
+          "clean": 144490,
+          "mart": 2392
         },
         "output_bytes": {
-          "raw": 7358232
+          "raw": 7358232,
+          "clean": 423655,
+          "mart": 24902
         },
-        "started_at": "2026-10-09T19:48:34.731030+00:00",
-        "finished_at": "2026-10-09T19:48:36.678827+00:00",
-        "duration_seconds": 1.948
+        "started_at": "2026-10-09T19:54:41.772869+00:00",
+        "finished_at": "2026-10-09T19:55:16.219006+00:00",
+        "duration_seconds": 34.446
       }
     },
     {
@@ -631,7 +1339,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20261009T194836Z_15112c0e",
+        "run_id": "20261009T195516Z_ed526477",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -649,9 +1357,9 @@
           "clean": 27419,
           "mart": 36237
         },
-        "started_at": "2026-10-09T19:48:36.701012+00:00",
-        "finished_at": "2026-10-09T19:48:39.013574+00:00",
-        "duration_seconds": 2.313
+        "started_at": "2026-10-09T19:55:16.279654+00:00",
+        "finished_at": "2026-10-09T19:55:18.726670+00:00",
+        "duration_seconds": 2.447
       }
     },
     {
@@ -662,18 +1370,26 @@
       "detail": "anno 2025 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20261009T194839Z_34c7efa2",
+        "run_id": "20261009T195519Z_137ecf64",
         "year": 2025,
-        "status": "FAILED",
+        "status": "SUCCESS",
         "quality_score": {
-          "raw": 100
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "clean": 17652,
+          "mart": 2196
         },
         "output_bytes": {
-          "raw": 779334
+          "raw": 779334,
+          "clean": 103098,
+          "mart": 19745
         },
-        "started_at": "2026-10-09T19:48:39.512046+00:00",
-        "finished_at": "2026-10-09T19:48:40.602867+00:00",
-        "duration_seconds": 1.091
+        "started_at": "2026-10-09T19:55:19.146156+00:00",
+        "finished_at": "2026-10-09T19:55:22.893109+00:00",
+        "duration_seconds": 3.747
       }
     },
     {
@@ -684,18 +1400,26 @@
       "detail": "anno 2025 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20261009T194841Z_2939a480",
+        "run_id": "20261009T195523Z_7ae27093",
         "year": 2025,
-        "status": "FAILED",
+        "status": "SUCCESS",
         "quality_score": {
-          "raw": 100
+          "raw": 100,
+          "clean": 90,
+          "mart": 100
+        },
+        "output_rows": {
+          "clean": 6594,
+          "mart": 1304
         },
         "output_bytes": {
-          "raw": 224493
+          "raw": 224493,
+          "clean": 37966,
+          "mart": 11509
         },
-        "started_at": "2026-10-09T19:48:41.024624+00:00",
-        "finished_at": "2026-10-09T19:48:41.783582+00:00",
-        "duration_seconds": 0.759
+        "started_at": "2026-10-09T19:55:23.304844+00:00",
+        "finished_at": "2026-10-09T19:55:24.858195+00:00",
+        "duration_seconds": 1.553
       }
     }
   ],
@@ -706,6 +1430,18 @@
         "entity": "Tempo",
         "label": "Tempo / data",
         "datasets": [
+          {
+            "slug": "civile_flussi",
+            "name": "Civile Flussi",
+            "column": "anno",
+            "semantic_type": "year"
+          },
+          {
+            "slug": "durata_civile",
+            "name": "Durata Civile",
+            "column": "anno",
+            "semantic_type": "year"
+          },
           {
             "slug": "durata_penale_classi",
             "name": "Durata Penale Classi",
@@ -719,6 +1455,36 @@
             "semantic_type": "year"
           },
           {
+            "slug": "giustizia_civile_indicatori",
+            "name": "Giustizia Civile Indicatori",
+            "column": "anno",
+            "semantic_type": "year"
+          },
+          {
+            "slug": "giustizia_penale_indicatori",
+            "name": "Giustizia Penale Indicatori",
+            "column": "anno",
+            "semantic_type": "year"
+          },
+          {
+            "slug": "intercettazioni",
+            "name": "Intercettazioni",
+            "column": "anno",
+            "semantic_type": "year"
+          },
+          {
+            "slug": "monitoraggio_mensile_civile",
+            "name": "Monitoraggio Mensile Civile",
+            "column": "anno",
+            "semantic_type": "year"
+          },
+          {
+            "slug": "monitoraggio_mensile_civile",
+            "name": "Monitoraggio Mensile Civile",
+            "column": "mese",
+            "semantic_type": "month"
+          },
+          {
             "slug": "monitoraggio_pnrr_giustizia",
             "name": "Monitoraggio Pnrr Giustizia",
             "column": "anno",
@@ -729,11 +1495,23 @@
             "name": "Monitoraggio Pnrr Giustizia",
             "column": "periodo",
             "semantic_type": "month"
+          },
+          {
+            "slug": "penale_flussi",
+            "name": "Penale Flussi",
+            "column": "anno",
+            "semantic_type": "year"
+          },
+          {
+            "slug": "spese_giustizia",
+            "name": "Spese Giustizia",
+            "column": "anno",
+            "semantic_type": "year"
           }
         ],
         "types": {
-          "year": 3,
-          "month": 1
+          "year": 11,
+          "month": 2
         }
       }
     },
