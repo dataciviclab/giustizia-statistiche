@@ -1,0 +1,17 @@
+# CI — preflight di tutti i dataset.yml
+# Logica nel reusable workflow org (drift-check: niente preflight inline).
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate-config:
+    uses: dataciviclab/.github/.github/workflows/dataset-config-check-reusable.yml@main
+    with:
+      globs: "datasets"
+      years: "from-config"

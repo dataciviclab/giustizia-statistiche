@@ -1,5 +1,7 @@
 # Giustizia Statistiche
 
+[![CI](https://github.com/dataciviclab/giustizia-statistiche/actions/workflows/ci.yml/badge.svg)](https://github.com/dataciviclab/giustizia-statistiche/actions/workflows/ci.yml)
+
 Ogni anno i tribunali italiani definiscono centinaia di migliaia di procedimenti — ma quanto tempo ci mettono, quanto costa all'erario e dove il sistema regge meglio? Questo repo rende interrogabili i dati statistici ufficiali del **Ministero della Giustizia — Direzione Generale di Statistica**: flussi civili e penali, durate, efficienza, intercettazioni, spese e monitoraggio PNRR, per ufficio giudiziario, distretto e anno.
 
 ## Cosa contengono
