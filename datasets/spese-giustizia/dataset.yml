@@ -1,0 +1,67 @@
+# Candidate: spese-giustizia
+# Fonte: Ministero della Giustizia - Direzione Generale di Statistica e Analisi Organizzativa
+# URL: https://datiestatistiche.giustizia.it/it/spese-giustizia.page
+# File XLSX: SpeseGiustizia_20142025.xlsx (sheet "Dati")
+# Copertura: 2014-2025 in un unico file snapshot.
+# NOTA: per il 2025 la fonte è cambiata (Modello 1/A/SG -> DATALAKE/SIAMM);
+#       NAZIONALE e INTERDISTRETTUALE compaiono solo dal 2025 (non sono totali).
+
+root: "../../out"
+schema_version: 1
+
+dataset:
+  name: "spese_giustizia"
+  source_id: "giustizia_statistiche"
+  tags: [giustizia, spese-giustizia, statistiche-giudiziarie]
+  category: giustizia
+  # Chiave di snapshot per il run: il file contiene gia l'intera serie 2014-2025.
+  years: [2025]
+  time_coverage:
+    start_year: 2014
+    end_year: 2025
+
+raw:
+  output_policy: overwrite
+  sources:
+    - name: "spese_giustizia_xlsx"
+      type: "http_file"
+      args:
+        url: "https://datiestatistiche.giustizia.it/cmsresources/cms/documents/SpeseGiustizia_20142025.xlsx"
+        filename: "SpeseGiustizia_20142025.xlsx"
+      primary: true
+
+clean:
+  sql: "sql/clean.sql"
+  read:
+    source: auto
+    mode: latest
+    header: true
+    sheet_name: "Dati"
+  required_columns: [anno, distretto, tipo_spesa, dettaglio_tipo_spesa, importo]
+  validate:
+    min_rows: 6000
+    not_null:
+      - anno
+      - distretto
+      - tipo_spesa
+
+mart:
+  tables:
+    - name: "spese_giustizia"
+      sql: "sql/mart.sql"
+    - name: "mart_nazionale_trend"
+      sql: "sql/mart_nazionale_trend.sql"
+  required_tables:
+    - "spese_giustizia"
+    - "mart_nazionale_trend"
+  validate:
+    table_rules:
+      spese_giustizia:
+        primary_key: [anno, distretto, tipo_spesa]
+        min_rows: 1000
+      mart_nazionale_trend:
+        primary_key: [anno, tipo_spesa]
+        min_rows: 40
+
+validation:
+  fail_on_error: true
