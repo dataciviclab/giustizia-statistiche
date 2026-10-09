@@ -13,8 +13,11 @@ license = "MIT"
 # duckdb: dipendenza runtime (usata dai test SQL e dal motore). toolkit non è
 # importato (CLI esterno) → vive nell'extra `pipeline`; lab-connectors arriva
 # transitivamente da toolkit (non si dichiara).
+# openpyxl: engine Excel per gli script unite_*.py (pandas.read_excel) —
+# non transitivo da toolkit/lab-connectors, va dichiarato qui.
 dependencies = [
     "duckdb>=1.5.3,<2",
+    "openpyxl>=3.1.0",
 ]
 
 # Nessun package Python: il repo è dati + SQL + scripts.
