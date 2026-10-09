@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+out/
+*.parquet
+*.csv
+*.tsv
+!tests/fixtures/*.tsv
+!.gitkeep
+
+# Local workspace
+_local/
+
+# Coverage
+.coverage

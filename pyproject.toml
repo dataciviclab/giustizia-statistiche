@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dataciviclab-giustizia-statistiche"
+version = "0.1.0"
+description = "Pipeline statistiche giudiziarie Ministero Giustizia: flussi civile/penale, indicatori, intercettazioni, spese"
+readme = "README.md"
+requires-python = ">=3.12"
+license = "MIT"
+
+# duckdb: dipendenza runtime (usata dai test SQL e dal motore). toolkit non è
+# importato (CLI esterno) → vive nell'extra `pipeline`; lab-connectors arriva
+# transitivamente da toolkit (non si dichiara).
+dependencies = [
+    "duckdb>=1.5.3,<2",
+]
+
+# Nessun package Python: il repo è dati + SQL + scripts.
+# Esplicito per evitare il flat-layout discovery di setuptools.
+[tool.setuptools]
+packages = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+    "ruff>=0.5",
+]
+pipeline = [
+    "dataciviclab-toolkit @ git+https://github.com/dataciviclab/toolkit.git",
+]
+
+[project.urls]
+Home = "https://github.com/dataciviclab/giustizia-statistiche"
+
+[tool.toolkit.extends]
+source_id = "giustizia_statistiche"
