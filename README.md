@@ -6,7 +6,7 @@ Ogni anno i tribunali italiani definiscono centinaia di migliaia di procedimenti
 
 ## Cosa contengono
 
-13 dataset, tutti dalla stessa fonte (`datiestatistiche.giustizia.it`), copertura **2014–2026** (salvo eccezioni indicate).
+15 dataset, tutti dalla stessa fonte (`datiestatistiche.giustizia.it`), copertura **2014–2026** (salvo eccezioni indicate).
 
 | Dataset | Righe | Periodo | Contenuto |
 |---|---|---|---|
@@ -23,6 +23,8 @@ Ogni anno i tribunali italiani definiscono centinaia di migliaia di procedimenti
 | `monitoraggio_pnrr_giustizia` | 2.720 | 2019–2026 | Definiti/pendenti per sede con target PNRR (civile) |
 | `monitoraggio_occ` | 216 | 2024–2025 | Flussi sovraindebitamento (OCC) per tipologia e distretto |
 | `mediazione_civile` | 8.756 | 2024–2026 | Mediazione civile: flussi semestrali per organismo e natura |
+| `ucp_numero` | 700 | 2021–2025 | Unità casi procedimenti istituite per sede (riforma cartoline) |
+| `ucp_dettaglio` | 741 | 2021–2025 | Censimento organizzativo UCP: udienze gestite e personale |
 
 ## Esempi di domande
 

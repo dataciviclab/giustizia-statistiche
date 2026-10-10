@@ -1,0 +1,67 @@
+# Candidate: ucp-numero (issue #6)
+# Fonte: Ministero della Giustizia - DG Statistica
+# URL: https://datiestatistiche.giustizia.it/it/monitoraggio_ucp_upp.page
+# File: UCP_2021_2025_Numero.csv (delimitatore ;)
+# Copertura: 2021-2025. Conteggio UCP istituiti per sede e anno.
+# NOTA: "Anno 2021" → cast; Stato è sempre "Convalidato" (colonna ridondante,
+#       mantenuta per traceability della fonte).
+
+root: "../../out"
+schema_version: 1
+
+dataset:
+  name: "ucp_numero"
+  source_id: "giustizia_statistiche"
+  tags: [giustizia, penale, ucp, riforma-cartoline, statistiche-giudiziarie]
+  category: giustizia
+  years: [2025]
+  time_coverage:
+    start_year: 2021
+    end_year: 2025
+
+raw:
+  output_policy: overwrite
+  sources:
+    - name: "ucp_numero_csv"
+      type: "http_file"
+      args:
+        url: "https://datiestatistiche.giustizia.it/cmsresources/cms/documents/UCP_2021_2025_Numero.csv"
+        filename: "UCP_2021_2025_Numero.csv"
+      primary: true
+
+clean:
+  sql: "sql/clean.sql"
+  read:
+    source: auto
+    mode: latest
+    delim: ";"
+    encoding: "utf-8"
+    header: true
+  required_columns: [ufficio, corte_appello, sede, anno, stato, num_ucp_istituiti]
+  validate:
+    min_rows: 600
+    not_null:
+      - anno
+      - sede
+      - num_ucp_istituiti
+
+mart:
+  tables:
+    - name: "ucp_numero"
+      sql: "sql/mart.sql"
+    - name: "mart_nazionale_trend"
+      sql: "sql/mart_nazionale_trend.sql"
+  required_tables:
+    - "ucp_numero"
+    - "mart_nazionale_trend"
+  validate:
+    table_rules:
+      ucp_numero:
+        primary_key: [anno, ufficio, sede]
+        min_rows: 600
+      mart_nazionale_trend:
+        primary_key: [anno]
+        min_rows: 5
+
+validation:
+  fail_on_error: true
