@@ -1,6 +1,6 @@
 -- Mart mart_nazionale: riga sintetica nazionale dal quadro distretti.
 -- Le medie dei clearance sono pesate sui definiti; la quota penale
--- oltre 2 anni è pesata sui definiti penali.
+-- oltre 2 anni è pesata sui definiti penali. PNRR: somma dei cohort.
 
 SELECT
     anno,
@@ -19,7 +19,9 @@ SELECT
     SUM(spesa_totale) AS spesa_totale,
     ROUND(SUM(spesa_totale) / NULLIF(SUM(civ_definiti), 0), 0) AS euro_per_procedimento_civ,
     SUM(pnrr_pendenti) AS pnrr_pendenti,
-    SUM(pnrr_target_2026) AS pnrr_target_2026,
-    (SUM(pnrr_pendenti) - SUM(pnrr_target_2026)) AS pnrr_scarto_vs_target
+    SUM(pnrr_cohort_2026) AS pnrr_cohort_2026,
+    SUM(pnrr_cohort_baseline_2026) AS pnrr_cohort_baseline_2026,
+    ROUND(SUM(pnrr_cohort_2026) * 100.0 / NULLIF(SUM(pnrr_cohort_baseline_2026), 0), 1)
+        AS pnrr_cohort_pct_residuo
 FROM clean_input
 GROUP BY anno

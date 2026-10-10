@@ -29,8 +29,18 @@ k1.metric("Clearance civile", f"{row['civ_clearance']:.2f}", delta_color="invers
 k2.metric("DT civile", f"{fmt_num(row['civ_disposition_gg'])} gg", delta_color="inverse")
 k3.metric("Penale > 2 anni", fmt_pct(row["quota_penale_oltre_2anni"] / 100), delta_color="inverse")
 k4.metric("€ / procedimento civile", fmt_eur(row["euro_per_procedimento_civ"]))
-pnrr_delta = None if row["pnrr_pct_target"] is None else f"{row['pnrr_pct_target']:.0f}% del target"
-k5.metric("PNRR pendenti", fmt_num(row["pnrr_pendenti"]), delta=pnrr_delta, delta_color="inverse")
+pnrr_delta = (
+    None
+    if row["pnrr_cohort_pct_residuo"] is None
+    else f"{row['pnrr_cohort_pct_residuo']:.1f}% del cohort (target ≤10%)"
+)
+k5.metric(
+    "PNRR pendenti",
+    fmt_num(row["pnrr_pendenti"]),
+    delta=pnrr_delta,
+    delta_color="inverse",
+    help="Cohort = vecchi arretrati 2017-2022 ancora pendenti (target -90%).",
+)
 
 st.divider()
 

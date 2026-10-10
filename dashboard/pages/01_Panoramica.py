@@ -58,10 +58,14 @@ k7.metric(
     help="Pendenti finali Tribunali civili, ultimo anno intero disponibile.",
 )
 k8.metric(
-    "Scarto vs target 2026",
-    fmt_num(n["pnrr_scarto_vs_target"]),
+    "Cohort arretrato residuo",
+    f"{n['pnrr_cohort_pct_residuo']:.1f}%",
     delta_color="inverse",
-    help="Pendenti attuali − target PNRR 2026 (somma target sedi con target pubblicato).",
+    help=(
+        "Quota dei vecchi arretrati (cause del 2017-2022 ancora pendenti a fine "
+        "2022) ancora in vita nel 2025. Target PNRR: ≤ 10% entro giugno 2026 "
+        "(riduzione del 90%). NON è la pendenza totale."
+    ),
 )
 
 st.divider()
@@ -70,7 +74,8 @@ quadro = load_quadro(QUADRO_YEAR)
 st.subheader("Quadro distretti")
 st.caption(
     "Ordinabile per colonna. Indicatori sui soli Tribunali; "
-    "spesa = erario totale del distretto."
+    "spesa = erario totale del distretto. PNRR: % residua del cohort "
+    "arretrato 2017-2022 (target ≤ 10%)."
 )
 
 show = quadro.copy()
@@ -79,8 +84,8 @@ show["civ_disposition_gg"] = show["civ_disposition_gg"].round(0)
 show["pen_disposition_gg"] = show["pen_disposition_gg"].round(0)
 show["quota_penale_oltre_2anni"] = show["quota_penale_oltre_2anni"].round(1)
 show["pnrr_pendenti"] = show["pnrr_pendenti"].round(0)
-show["pnrr_target_2026"] = show["pnrr_target_2026"].round(0)
-show["pnrr_pct_target"] = show["pnrr_pct_target"].round(0)
+show["pnrr_cohort_2026"] = show["pnrr_cohort_2026"].round(0)
+show["pnrr_cohort_pct_residuo"] = show["pnrr_cohort_pct_residuo"].round(1)
 cols = [
     "distretto",
     "civ_clearance",
@@ -90,8 +95,9 @@ cols = [
     "quota_penale_oltre_2anni",
     "euro_procedimento",
     "pnrr_pendenti",
-    "pnrr_target_2026",
-    "pnrr_pct_target",
+    "pnrr_cohort_2026",
+    "pnrr_cohort_pct_residuo",
+    "pnrr_sotto_target_2026",
 ]
 st.dataframe(
     show[cols].sort_values("civ_clearance"),
@@ -110,10 +116,13 @@ st.dataframe(
             "€/procedimento", format="localized"
         ),
         "pnrr_pendenti": st.column_config.NumberColumn("PNRR pendenti", format="localized"),
-        "pnrr_target_2026": st.column_config.NumberColumn("Target 2026", format="localized"),
-        "pnrr_pct_target": st.column_config.NumberColumn(
-            "% target", format="localized"
+        "pnrr_cohort_2026": st.column_config.NumberColumn(
+            "Cohort residuo", format="localized"
         ),
+        "pnrr_cohort_pct_residuo": st.column_config.NumberColumn(
+            "% cohort residuo", format="%.1f"
+        ),
+        "pnrr_sotto_target_2026": "Sotto target",
     },
 )
 

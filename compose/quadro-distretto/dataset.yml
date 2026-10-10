@@ -71,7 +71,8 @@ clean:
     - quota_penale_oltre_2anni
     - spesa_totale
     - pnrr_pendenti
-    - pnrr_target_2026
+    - pnrr_cohort_2026
+    - pnrr_cohort_baseline_2026
   validate:
     not_null:
       - anno

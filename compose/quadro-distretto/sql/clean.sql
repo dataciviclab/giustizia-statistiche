@@ -8,10 +8,14 @@
 -- - Spese: escluse le righe Nazionale/Interdistrettuale (voci reali ma non
 --   distretti). Euro/procedimento = spesa distretto ÷ definiti civili.
 -- - Durata classi: quota = somma delle classi 'oltre 2 anni' + 'oltre 3 anni'.
---   Le sezioni con classificazione a 4 mesi ('oltre 1 anno') NON sono
+--   Le sezioni con classificazione a 4 mesi ('oltre 1anno') NON sono
 --   confrontabili e non sono conteggiate → quota sottostima il lungo.
--- - PNRR: solo Civile, Tribunale, Intero anno; i target sono presenti solo
---   per alcune sedi → somma dei target non nulli per distretto.
+-- - PNRR: solo Civile, Tribunale, Intero anno, anno 2025.
+--   I target PNRR riguardano il COHORT dei vecchi arretrati (pendenti al
+--   31/12/2022 iscritti 2017-2022): baseline_* = dimensione iniziale del
+--   cohort, pendenti_obiettivo_2026 = quanti di quel cohort sono ancora
+--   pendenti. Obiettivo = residuo ≤ 10% della baseline (-90% entro 06/2026).
+--   NON è il target sulla pendenza totale — confrontare solo cohort vs baseline.
 
 WITH civ AS (
     SELECT
@@ -76,11 +80,13 @@ pnrr AS (
         anno,
         distretto,
         SUM(pendenti_fine_periodo) AS pnrr_pendenti,
-        SUM(pendenti_obiettivo_2026) AS pnrr_target_2026
+        SUM(pendenti_obiettivo_2026) AS pnrr_cohort_2026,
+        SUM(baseline_obiettivo_2026) AS pnrr_cohort_baseline_2026
     FROM read_parquet('{support.monitoraggio_pnrr_giustizia.mart.monitoraggio_pnrr_giustizia}')
     WHERE materia = 'Civile'
       AND tipo_ufficio = 'Tribunale'
       AND periodo = 'Intero anno'
+      AND anno = 2025
     GROUP BY anno, distretto
 )
 SELECT
@@ -99,7 +105,8 @@ SELECT
     d.quota_penale_oltre_2anni,
     s.spesa_totale,
     pn.pnrr_pendenti,
-    pn.pnrr_target_2026
+    pn.pnrr_cohort_2026,
+    pn.pnrr_cohort_baseline_2026
 FROM civ c
 LEFT JOIN pen p ON c.anno = p.anno AND c.distretto = p.distretto
 LEFT JOIN civ_ind ci ON c.anno = ci.anno AND c.distretto = ci.distretto

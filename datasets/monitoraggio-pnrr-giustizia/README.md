@@ -15,10 +15,10 @@ Serie 2019–2026 (H1) di definiti e pendenti per sede, con target PNRR sul civi
 | Colonna | Significato |
 |---|---|
 | `arretrato` | pendenti oltre 1 anno (definizione ministero) |
-| `baseline_obiettivo_2024/2026` | costante di riferimento per sede (NON serie storica) |
-| `pendenti_obiettivo_2024/2026` | soglia target per sede |
+| `baseline_obiettivo_2024/2026` | dimensione del **cohort** di riferimento (costante per sede): pendenti al 31/12/2019 iscritti fino al 2016/2017 per il 2024; pendenti al 31/12/2022 iscritti dal 2017 per il 2026 |
+| `pendenti_obiettivo_2024/2026` | quanti di quel cohort sono **ancora pendenti** nell'anno di riga (serie storica del progresso) |
 
-Il penale non ha target né arretrato nel file.
+Target ufficiali (M1C1, dopo revisione UE): **-95%** sul cohort 2024 entro 31/12/2024 (raggiunto) e **-90%** sul cohort 2026 entro 30/06/2026, cioè residuo ≤ 5% / ≤ 10% della baseline. Non sono target sulla pendenza totale.
 
 ## Caveat
 
