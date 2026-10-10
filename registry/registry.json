@@ -2,7 +2,7 @@
   "schema_version": 1,
   "repo": "giustizia-statistiche",
   "source_repo": "dataciviclab/giustizia-statistiche",
-  "updated_at": "2026-10-09",
+  "updated_at": "2026-10-10",
   "datasets": [
     {
       "slug": "civile_flussi",
@@ -559,6 +559,110 @@
       ]
     },
     {
+      "slug": "mediazione_civile",
+      "name": "Mediazione Civile",
+      "description": "",
+      "source": "",
+      "source_id": "giustizia_statistiche",
+      "period": {
+        "start": 2024,
+        "end": 2026
+      },
+      "tags": [
+        "giustizia",
+        "civile",
+        "mediazione",
+        "alternative-disputa",
+        "statistiche-giudiziarie"
+      ],
+      "category": "giustizia",
+      "columns": [
+        {
+          "name": "anno",
+          "type": "INTEGER",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "year"
+        },
+        {
+          "name": "semestre",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "distretto",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "tipologia_organismo",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "natura",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "pendenti_iniziali",
+          "type": "BIGINT",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "iscritti",
+          "type": "BIGINT",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "mancata_comparizione",
+          "type": "BIGINT",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "accordo_raggiunto",
+          "type": "BIGINT",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "accordo_non_raggiunto",
+          "type": "BIGINT",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "totale_definiti",
+          "type": "BIGINT",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "pendenti_finali",
+          "type": "BIGINT",
+          "role": "metric",
+          "description": ""
+        }
+      ],
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-clean/giustizia-statistiche/mediazione_civile/2026/mediazione_civile_2026_clean.parquet",
+        "multi_file": false
+      },
+      "stage": "incubating",
+      "mart_refs": [
+        "mediazione_civile__mediazione_civile",
+        "mediazione_civile__mart_nazionale_trend"
+      ]
+    },
+    {
       "slug": "monitoraggio_mensile_civile",
       "name": "Monitoraggio Mensile Civile",
       "description": "",
@@ -651,6 +755,140 @@
       "stage": "incubating",
       "mart_refs": [
         "monitoraggio_mensile_civile__monitoraggio_mensile_civile"
+      ]
+    },
+    {
+      "slug": "monitoraggio_occ",
+      "name": "Monitoraggio Occ",
+      "description": "",
+      "source": "",
+      "source_id": "giustizia_statistiche",
+      "period": {
+        "start": 2024,
+        "end": 2025
+      },
+      "tags": [
+        "giustizia",
+        "sovraindebitamento",
+        "occ",
+        "flussi",
+        "statistiche-giudiziarie"
+      ],
+      "category": "giustizia",
+      "columns": [
+        {
+          "name": "anno",
+          "type": "INTEGER",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "year"
+        },
+        {
+          "name": "macro_area",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "distretto",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "tipologia_procedimento",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "pendenti_iniziali",
+          "type": "BIGINT",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "iscritti",
+          "type": "BIGINT",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "aperte",
+          "type": "BIGINT",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "definiti",
+          "type": "BIGINT",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "rinuncia",
+          "type": "BIGINT",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "chiuse_per_rinuncia",
+          "type": "BIGINT",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "definiti_istanze_non_ammissibili",
+          "type": "BIGINT",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "definiti_diniego_omologazione",
+          "type": "BIGINT",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "definiti_sentenza_omologazione",
+          "type": "BIGINT",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "definiti_sentenza_ammissione",
+          "type": "BIGINT",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "chiuse_accolte",
+          "type": "BIGINT",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "chiuse_rigettate",
+          "type": "BIGINT",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "pendenti_finali",
+          "type": "BIGINT",
+          "role": "metric",
+          "description": ""
+        }
+      ],
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-clean/giustizia-statistiche/monitoraggio_occ/2025/monitoraggio_occ_2025_clean.parquet",
+        "multi_file": false
+      },
+      "stage": "incubating",
+      "mart_refs": [
+        "monitoraggio_occ__monitoraggio_occ",
+        "monitoraggio_occ__mart_nazionale_trend"
       ]
     },
     {
@@ -853,6 +1091,134 @@
       ]
     },
     {
+      "slug": "quadro_distretto",
+      "name": "Quadro Distretto",
+      "description": "Compose giustizia penale/civile: per distretto (snapshot 2025) - flussi civile e penale, clearance e disposition time, quota penale oltre 2 anni, spesa erario, pendenti PNRR vs target 2026.",
+      "source": "",
+      "source_id": "dataciviclab_composite",
+      "period": {
+        "start": 2025,
+        "end": 2025
+      },
+      "tags": [
+        "giustizia",
+        "compose",
+        "quadro",
+        "distretto",
+        "cross"
+      ],
+      "category": "giustizia",
+      "columns": [
+        {
+          "name": "anno",
+          "type": "INTEGER",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "year"
+        },
+        {
+          "name": "distretto",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "civ_sopravvenuti",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "civ_definiti",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "civ_pendenti",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "pen_sopravvenuti",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "pen_definiti",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "pen_pendenti",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "civ_clearance",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "civ_disposition_gg",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "pen_clearance",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "pen_disposition_gg",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "quota_penale_oltre_2anni",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "spesa_totale",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "pnrr_pendenti",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "pnrr_target_2026",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        }
+      ],
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-clean/giustizia-statistiche/quadro_distretto/2025/quadro_distretto_2025_clean.parquet",
+        "multi_file": false
+      },
+      "stage": "incubating",
+      "mart_refs": [
+        "quadro_distretto__mart_quadro",
+        "quadro_distretto__mart_nazionale"
+      ]
+    },
+    {
       "slug": "spese_giustizia",
       "name": "Spese Giustizia",
       "description": "",
@@ -910,6 +1276,245 @@
       "mart_refs": [
         "spese_giustizia__spese_giustizia",
         "spese_giustizia__mart_nazionale_trend"
+      ]
+    },
+    {
+      "slug": "ucp_dettaglio",
+      "name": "Ucp Dettaglio",
+      "description": "",
+      "source": "",
+      "source_id": "giustizia_statistiche",
+      "period": {
+        "start": 2021,
+        "end": 2025
+      },
+      "tags": [
+        "giustizia",
+        "penale",
+        "ucp",
+        "riforma-cartoline",
+        "statistiche-giudiziarie"
+      ],
+      "category": "giustizia",
+      "columns": [
+        {
+          "name": "corte_appello",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "descrizione",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "sede",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "anno",
+          "type": "INTEGER",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "year"
+        },
+        {
+          "name": "identificativo_ucp",
+          "type": "INTEGER",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "us_num",
+          "type": "INTEGER",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "supporto",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "us_segreteria_del_pm",
+          "type": "INTEGER",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "us_dibattimento_mod_21",
+          "type": "INTEGER",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "us_definizione_affari_seriali_semplici",
+          "type": "INTEGER",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "us_spese_di_giustizia",
+          "type": "INTEGER",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "us_affari_civili",
+          "type": "INTEGER",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "us_dibattimento_mod_21_bis",
+          "type": "INTEGER",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "us_impugnazioni",
+          "type": "INTEGER",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "us_esecuzione_penale",
+          "type": "INTEGER",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "us_trattazione_giudizio_direttissimo",
+          "type": "INTEGER",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "us_convalide_di_arresto",
+          "type": "INTEGER",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "pr_pagg_spr_supp",
+          "type": "INTEGER",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "pers_amm_ass",
+          "type": "INTEGER",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "vpo_ass",
+          "type": "INTEGER",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "tiroc_art73",
+          "type": "INTEGER",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "tiroc_art37",
+          "type": "INTEGER",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "borse_studio",
+          "type": "INTEGER",
+          "role": "metric",
+          "description": ""
+        }
+      ],
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-clean/giustizia-statistiche/ucp_dettaglio/2025/ucp_dettaglio_2025_clean.parquet",
+        "multi_file": false
+      },
+      "stage": "incubating",
+      "mart_refs": [
+        "ucp_dettaglio__ucp_dettaglio",
+        "ucp_dettaglio__mart_sintesi"
+      ]
+    },
+    {
+      "slug": "ucp_numero",
+      "name": "Ucp Numero",
+      "description": "",
+      "source": "",
+      "source_id": "giustizia_statistiche",
+      "period": {
+        "start": 2021,
+        "end": 2025
+      },
+      "tags": [
+        "giustizia",
+        "penale",
+        "ucp",
+        "riforma-cartoline",
+        "statistiche-giudiziarie"
+      ],
+      "category": "giustizia",
+      "columns": [
+        {
+          "name": "ufficio",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "corte_appello",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "sede",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "anno",
+          "type": "INTEGER",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "year"
+        },
+        {
+          "name": "stato",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "country_code"
+        },
+        {
+          "name": "num_ucp_istituiti",
+          "type": "INTEGER",
+          "role": "metric",
+          "description": ""
+        }
+      ],
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-clean/giustizia-statistiche/ucp_numero/2025/ucp_numero_2025_clean.parquet",
+        "multi_file": false
+      },
+      "stage": "incubating",
+      "mart_refs": [
+        "ucp_numero__ucp_numero",
+        "ucp_numero__mart_nazionale_trend"
       ]
     }
   ],
@@ -1025,12 +1630,52 @@
       }
     },
     {
+      "slug": "mediazione_civile__mart_nazionale_trend",
+      "dataset": "mediazione_civile",
+      "table": "mart_nazionale_trend",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/giustizia-statistiche/mediazione_civile/2026/mart_nazionale_trend.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "mediazione_civile__mediazione_civile",
+      "dataset": "mediazione_civile",
+      "table": "mediazione_civile",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/giustizia-statistiche/mediazione_civile/2026/mediazione_civile.parquet",
+        "multi_file": false
+      }
+    },
+    {
       "slug": "monitoraggio_mensile_civile__monitoraggio_mensile_civile",
       "dataset": "monitoraggio_mensile_civile",
       "table": "monitoraggio_mensile_civile",
       "location": {
         "type": "gcs",
         "path": "gs://dataciviclab-mart/giustizia-statistiche/monitoraggio_mensile_civile/2025/monitoraggio_mensile_civile.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "monitoraggio_occ__mart_nazionale_trend",
+      "dataset": "monitoraggio_occ",
+      "table": "mart_nazionale_trend",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/giustizia-statistiche/monitoraggio_occ/2025/mart_nazionale_trend.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "monitoraggio_occ__monitoraggio_occ",
+      "dataset": "monitoraggio_occ",
+      "table": "monitoraggio_occ",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/giustizia-statistiche/monitoraggio_occ/2025/monitoraggio_occ.parquet",
         "multi_file": false
       }
     },
@@ -1065,6 +1710,26 @@
       }
     },
     {
+      "slug": "quadro_distretto__mart_nazionale",
+      "dataset": "quadro_distretto",
+      "table": "mart_nazionale",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/giustizia-statistiche/quadro_distretto/2025/mart_nazionale.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "quadro_distretto__mart_quadro",
+      "dataset": "quadro_distretto",
+      "table": "mart_quadro",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/giustizia-statistiche/quadro_distretto/2025/mart_quadro.parquet",
+        "multi_file": false
+      }
+    },
+    {
       "slug": "spese_giustizia__mart_nazionale_trend",
       "dataset": "spese_giustizia",
       "table": "mart_nazionale_trend",
@@ -1083,9 +1748,79 @@
         "path": "gs://dataciviclab-mart/giustizia-statistiche/spese_giustizia/2025/spese_giustizia.parquet",
         "multi_file": false
       }
+    },
+    {
+      "slug": "ucp_dettaglio__mart_sintesi",
+      "dataset": "ucp_dettaglio",
+      "table": "mart_sintesi",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/giustizia-statistiche/ucp_dettaglio/2025/mart_sintesi.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "ucp_dettaglio__ucp_dettaglio",
+      "dataset": "ucp_dettaglio",
+      "table": "ucp_dettaglio",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/giustizia-statistiche/ucp_dettaglio/2025/ucp_dettaglio.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "ucp_numero__mart_nazionale_trend",
+      "dataset": "ucp_numero",
+      "table": "mart_nazionale_trend",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/giustizia-statistiche/ucp_numero/2025/mart_nazionale_trend.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "ucp_numero__ucp_numero",
+      "dataset": "ucp_numero",
+      "table": "ucp_numero",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/giustizia-statistiche/ucp_numero/2025/ucp_numero.parquet",
+        "multi_file": false
+      }
     }
   ],
   "signals": [
+    {
+      "id": "compose:quadro_distretto",
+      "source_id": "dataciviclab_composite",
+      "status": "ok",
+      "label": "quadro_distretto",
+      "detail": "anno 2025 — mart: si",
+      "action": "",
+      "run": {
+        "run_id": "20261010T123606Z_38d281b8",
+        "year": 2025,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "clean": 26,
+          "mart": 27
+        },
+        "output_bytes": {
+          "raw": 5971,
+          "clean": 4727,
+          "mart": 8521
+        },
+        "started_at": "2026-10-10T12:36:06.886383+00:00",
+        "finished_at": "2026-10-10T12:36:07.079841+00:00",
+        "duration_seconds": 0.193
+      }
+    },
     {
       "id": "civile_flussi",
       "source_id": "giustizia_statistiche",
@@ -1094,7 +1829,7 @@
       "detail": "anno 2025 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20261009T195345Z_3afb3d79",
+        "run_id": "20261010T123424Z_dc7f0431",
         "year": 2025,
         "status": "SUCCESS",
         "quality_score": {
@@ -1109,11 +1844,11 @@
         "output_bytes": {
           "raw": 6716220,
           "clean": 698682,
-          "mart": 5953
+          "mart": 5971
         },
-        "started_at": "2026-10-09T19:53:45.407479+00:00",
-        "finished_at": "2026-10-09T19:54:15.471440+00:00",
-        "duration_seconds": 30.064
+        "started_at": "2026-10-10T12:34:24.512652+00:00",
+        "finished_at": "2026-10-10T12:34:52.900193+00:00",
+        "duration_seconds": 28.388
       }
     },
     {
@@ -1124,7 +1859,7 @@
       "detail": "anno 2025 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20261009T195415Z_471b1939",
+        "run_id": "20261010T123452Z_6e9c86e2",
         "year": 2025,
         "status": "SUCCESS",
         "quality_score": {
@@ -1140,11 +1875,11 @@
         "output_bytes": {
           "raw": 2007960,
           "clean": 129899,
-          "mart": 88920
+          "mart": 88927
         },
-        "started_at": "2026-10-09T19:54:15.531188+00:00",
-        "finished_at": "2026-10-09T19:54:19.961182+00:00",
-        "duration_seconds": 4.43
+        "started_at": "2026-10-10T12:34:52.957859+00:00",
+        "finished_at": "2026-10-10T12:34:57.081371+00:00",
+        "duration_seconds": 4.124
       }
     },
     {
@@ -1155,7 +1890,7 @@
       "detail": "anno 2025 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20261009T195421Z_5fdcb15a",
+        "run_id": "20261010T123458Z_e1b92a58",
         "year": 2025,
         "status": "SUCCESS",
         "quality_score": {
@@ -1170,12 +1905,12 @@
         },
         "output_bytes": {
           "raw": 11937993,
-          "clean": 91075,
-          "mart": 132950
+          "clean": 91069,
+          "mart": 132945
         },
-        "started_at": "2026-10-09T19:54:21.853984+00:00",
-        "finished_at": "2026-10-09T19:54:24.769944+00:00",
-        "duration_seconds": 2.916
+        "started_at": "2026-10-10T12:34:58.890794+00:00",
+        "finished_at": "2026-10-10T12:35:01.779953+00:00",
+        "duration_seconds": 2.889
       }
     },
     {
@@ -1186,7 +1921,7 @@
       "detail": "anno 2025 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20261009T195426Z_b14b09db",
+        "run_id": "20261010T123503Z_c9575c4c",
         "year": 2025,
         "status": "SUCCESS",
         "quality_score": {
@@ -1201,12 +1936,12 @@
         },
         "output_bytes": {
           "raw": 9670161,
-          "clean": 32417,
-          "mart": 28415
+          "clean": 32410,
+          "mart": 28409
         },
-        "started_at": "2026-10-09T19:54:26.824786+00:00",
-        "finished_at": "2026-10-09T19:54:29.634831+00:00",
-        "duration_seconds": 2.81
+        "started_at": "2026-10-10T12:35:03.739495+00:00",
+        "finished_at": "2026-10-10T12:35:06.333566+00:00",
+        "duration_seconds": 2.594
       }
     },
     {
@@ -1217,7 +1952,7 @@
       "detail": "anno 2025 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20261009T195429Z_84191ac3",
+        "run_id": "20261010T123506Z_a3377225",
         "year": 2025,
         "status": "SUCCESS",
         "quality_score": {
@@ -1232,12 +1967,12 @@
         },
         "output_bytes": {
           "raw": 8213230,
-          "clean": 412620,
-          "mart": 25442
+          "clean": 412613,
+          "mart": 25443
         },
-        "started_at": "2026-10-09T19:54:29.692651+00:00",
-        "finished_at": "2026-10-09T19:54:36.951352+00:00",
-        "duration_seconds": 7.259
+        "started_at": "2026-10-10T12:35:06.391017+00:00",
+        "finished_at": "2026-10-10T12:35:13.292701+00:00",
+        "duration_seconds": 6.902
       }
     },
     {
@@ -1248,7 +1983,7 @@
       "detail": "anno 2025 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20261009T195437Z_02a73886",
+        "run_id": "20261010T123513Z_d23f80d6",
         "year": 2025,
         "status": "SUCCESS",
         "quality_score": {
@@ -1259,16 +1994,16 @@
         "output_rows": {
           "raw": 10488,
           "clean": 10478,
-          "mart": 1358
+          "mart": 1352
         },
         "output_bytes": {
           "raw": 914617,
-          "clean": 134681,
-          "mart": 61152
+          "clean": 134619,
+          "mart": 60660
         },
-        "started_at": "2026-10-09T19:54:37.020853+00:00",
-        "finished_at": "2026-10-09T19:54:39.589422+00:00",
-        "duration_seconds": 2.569
+        "started_at": "2026-10-10T12:35:13.358290+00:00",
+        "finished_at": "2026-10-10T12:35:15.810876+00:00",
+        "duration_seconds": 2.453
       }
     },
     {
@@ -1279,7 +2014,7 @@
       "detail": "anno 2025 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20261009T195440Z_68d75cb2",
+        "run_id": "20261010T123516Z_d483c9b3",
         "year": 2025,
         "status": "SUCCESS",
         "quality_score": {
@@ -1296,9 +2031,40 @@
           "clean": 8386,
           "mart": 5418
         },
-        "started_at": "2026-10-09T19:54:40.072532+00:00",
-        "finished_at": "2026-10-09T19:54:41.344449+00:00",
-        "duration_seconds": 1.272
+        "started_at": "2026-10-10T12:35:16.313658+00:00",
+        "finished_at": "2026-10-10T12:35:17.590558+00:00",
+        "duration_seconds": 1.277
+      }
+    },
+    {
+      "id": "mediazione_civile",
+      "source_id": "giustizia_statistiche",
+      "status": "ok",
+      "label": "mediazione_civile",
+      "detail": "anno 2026 — mart: si",
+      "action": "",
+      "run": {
+        "run_id": "20261010T123517Z_702750ea",
+        "year": 2026,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 95,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 8756,
+          "clean": 8756,
+          "mart": 8776
+        },
+        "output_bytes": {
+          "raw": 830082,
+          "clean": 58931,
+          "mart": 71045
+        },
+        "started_at": "2026-10-10T12:35:17.645162+00:00",
+        "finished_at": "2026-10-10T12:35:19.946486+00:00",
+        "duration_seconds": 2.301
       }
     },
     {
@@ -1309,7 +2075,7 @@
       "detail": "anno 2025 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20261009T195441Z_4b00e1da",
+        "run_id": "20261010T123520Z_8b4a1da7",
         "year": 2025,
         "status": "SUCCESS",
         "quality_score": {
@@ -1326,9 +2092,40 @@
           "clean": 423655,
           "mart": 24902
         },
-        "started_at": "2026-10-09T19:54:41.772869+00:00",
-        "finished_at": "2026-10-09T19:55:16.219006+00:00",
-        "duration_seconds": 34.446
+        "started_at": "2026-10-10T12:35:20.413137+00:00",
+        "finished_at": "2026-10-10T12:35:53.196155+00:00",
+        "duration_seconds": 32.783
+      }
+    },
+    {
+      "id": "monitoraggio_occ",
+      "source_id": "giustizia_statistiche",
+      "status": "ok",
+      "label": "monitoraggio_occ",
+      "detail": "anno 2025 — mart: si",
+      "action": "",
+      "run": {
+        "run_id": "20261010T123554Z_ae07a2b2",
+        "year": 2025,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 216,
+          "clean": 216,
+          "mart": 224
+        },
+        "output_bytes": {
+          "raw": 16986,
+          "clean": 6927,
+          "mart": 9731
+        },
+        "started_at": "2026-10-10T12:35:54.560696+00:00",
+        "finished_at": "2026-10-10T12:35:55.215618+00:00",
+        "duration_seconds": 0.655
       }
     },
     {
@@ -1339,7 +2136,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20261009T195516Z_ed526477",
+        "run_id": "20261010T123555Z_723466d4",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -1357,9 +2154,9 @@
           "clean": 27419,
           "mart": 36237
         },
-        "started_at": "2026-10-09T19:55:16.279654+00:00",
-        "finished_at": "2026-10-09T19:55:18.726670+00:00",
-        "duration_seconds": 2.447
+        "started_at": "2026-10-10T12:35:55.283513+00:00",
+        "finished_at": "2026-10-10T12:35:57.356903+00:00",
+        "duration_seconds": 2.073
       }
     },
     {
@@ -1370,7 +2167,7 @@
       "detail": "anno 2025 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20261009T195519Z_137ecf64",
+        "run_id": "20261010T123557Z_e5b6bf03",
         "year": 2025,
         "status": "SUCCESS",
         "quality_score": {
@@ -1384,12 +2181,12 @@
         },
         "output_bytes": {
           "raw": 779334,
-          "clean": 103098,
+          "clean": 103093,
           "mart": 19745
         },
-        "started_at": "2026-10-09T19:55:19.146156+00:00",
-        "finished_at": "2026-10-09T19:55:22.893109+00:00",
-        "duration_seconds": 3.747
+        "started_at": "2026-10-10T12:35:57.759894+00:00",
+        "finished_at": "2026-10-10T12:36:01.334198+00:00",
+        "duration_seconds": 3.574
       }
     },
     {
@@ -1400,7 +2197,7 @@
       "detail": "anno 2025 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20261009T195523Z_7ae27093",
+        "run_id": "20261010T123601Z_58bae07e",
         "year": 2025,
         "status": "SUCCESS",
         "quality_score": {
@@ -1414,18 +2211,95 @@
         },
         "output_bytes": {
           "raw": 224493,
-          "clean": 37966,
-          "mart": 11509
+          "clean": 37982,
+          "mart": 11525
         },
-        "started_at": "2026-10-09T19:55:23.304844+00:00",
-        "finished_at": "2026-10-09T19:55:24.858195+00:00",
-        "duration_seconds": 1.553
+        "started_at": "2026-10-10T12:36:01.753571+00:00",
+        "finished_at": "2026-10-10T12:36:03.222816+00:00",
+        "duration_seconds": 1.469
+      }
+    },
+    {
+      "id": "ucp_dettaglio",
+      "source_id": "giustizia_statistiche",
+      "status": "ok",
+      "label": "ucp_dettaglio",
+      "detail": "anno 2025 — mart: si",
+      "action": "",
+      "run": {
+        "run_id": "20261010T123603Z_b52a50f3",
+        "year": 2025,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 95,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 741,
+          "clean": 741,
+          "mart": 1379
+        },
+        "output_bytes": {
+          "raw": 111041,
+          "clean": 12168,
+          "mart": 19113
+        },
+        "started_at": "2026-10-10T12:36:03.292415+00:00",
+        "finished_at": "2026-10-10T12:36:05.011037+00:00",
+        "duration_seconds": 1.719
+      }
+    },
+    {
+      "id": "ucp_numero",
+      "source_id": "giustizia_statistiche",
+      "status": "ok",
+      "label": "ucp_numero",
+      "detail": "anno 2025 — mart: si",
+      "action": "",
+      "run": {
+        "run_id": "20261010T123606Z_1ce6f58d",
+        "year": 2025,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 700,
+          "clean": 700,
+          "mart": 705
+        },
+        "output_bytes": {
+          "raw": 48811,
+          "clean": 3689,
+          "mart": 4485
+        },
+        "started_at": "2026-10-10T12:36:06.043553+00:00",
+        "finished_at": "2026-10-10T12:36:06.772588+00:00",
+        "duration_seconds": 0.729
       }
     }
   ],
   "codelists": [],
   "entities": {
     "entities": {
+      "Nazione": {
+        "entity": "Nazione",
+        "label": "Nazione",
+        "datasets": [
+          {
+            "slug": "ucp_numero",
+            "name": "Ucp Numero",
+            "column": "stato",
+            "semantic_type": "country_code"
+          }
+        ],
+        "types": {
+          "country_code": 1
+        }
+      },
       "Tempo": {
         "entity": "Tempo",
         "label": "Tempo / data",
@@ -1473,6 +2347,12 @@
             "semantic_type": "year"
           },
           {
+            "slug": "mediazione_civile",
+            "name": "Mediazione Civile",
+            "column": "anno",
+            "semantic_type": "year"
+          },
+          {
             "slug": "monitoraggio_mensile_civile",
             "name": "Monitoraggio Mensile Civile",
             "column": "anno",
@@ -1483,6 +2363,12 @@
             "name": "Monitoraggio Mensile Civile",
             "column": "mese",
             "semantic_type": "month"
+          },
+          {
+            "slug": "monitoraggio_occ",
+            "name": "Monitoraggio Occ",
+            "column": "anno",
+            "semantic_type": "year"
           },
           {
             "slug": "monitoraggio_pnrr_giustizia",
@@ -1503,14 +2389,32 @@
             "semantic_type": "year"
           },
           {
+            "slug": "quadro_distretto",
+            "name": "Quadro Distretto",
+            "column": "anno",
+            "semantic_type": "year"
+          },
+          {
             "slug": "spese_giustizia",
             "name": "Spese Giustizia",
+            "column": "anno",
+            "semantic_type": "year"
+          },
+          {
+            "slug": "ucp_dettaglio",
+            "name": "Ucp Dettaglio",
+            "column": "anno",
+            "semantic_type": "year"
+          },
+          {
+            "slug": "ucp_numero",
+            "name": "Ucp Numero",
             "column": "anno",
             "semantic_type": "year"
           }
         ],
         "types": {
-          "year": 11,
+          "year": 16,
           "month": 2
         }
       }
