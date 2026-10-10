@@ -6,7 +6,7 @@ Ogni anno i tribunali italiani definiscono centinaia di migliaia di procedimenti
 
 ## Cosa contengono
 
-12 dataset, tutti dalla stessa fonte (`datiestatistiche.giustizia.it`), copertura **2014–2026** (salvo eccezioni indicate).
+13 dataset, tutti dalla stessa fonte (`datiestatistiche.giustizia.it`), copertura **2014–2026** (salvo eccezioni indicate).
 
 | Dataset | Righe | Periodo | Contenuto |
 |---|---|---|---|
@@ -22,6 +22,7 @@ Ogni anno i tribunali italiani definiscono centinaia di migliaia di procedimenti
 | `intercettazioni` | 3.952 | 2014–2025 | Bersagli intercettazioni per tipologia e ufficio |
 | `monitoraggio_pnrr_giustizia` | 2.720 | 2019–2026 | Definiti/pendenti per sede con target PNRR (civile) |
 | `monitoraggio_occ` | 216 | 2024–2025 | Flussi sovraindebitamento (OCC) per tipologia e distretto |
+| `mediazione_civile` | 8.756 | 2024–2026 | Mediazione civile: flussi semestrali per organismo e natura |
 
 ## Esempi di domande
 

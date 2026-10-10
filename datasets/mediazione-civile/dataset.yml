@@ -1,0 +1,70 @@
+# Candidate: mediazione-civile (issue #4)
+# Fonte: Ministero della Giustizia - DG Statistica
+# URL pagina: https://datiestatistiche.giustizia.it/page/it/rilevazioni_civili?contentId=TGN15023
+# File: Mediazione_semestrale_*_Flussi.csv — URL ROTANTE (il nome cambia a ogni
+#       aggiornamento semestrale) → script di discovery discover_flussi.py.
+# Copertura: 2024-S1 → 2026-S1.
+# NOTA: il file ha anche Organismi/Categoria/Durata/Assistenza (altri CSV,
+#       grani diversi) — non inclusi in v0.
+
+root: "../../out"
+schema_version: 1
+
+dataset:
+  name: "mediazione_civile"
+  source_id: "giustizia_statistiche"
+  tags: [giustizia, civile, mediazione, alternative-disputa, statistiche-giudiziarie]
+  category: giustizia
+  years: [2026]
+  time_coverage:
+    start_year: 2024
+    end_year: 2026
+
+raw:
+  output_policy: overwrite
+  sources:
+    - type: script
+      args:
+        command: "python scripts/discover_flussi.py --output raw_input.csv"
+        output: "raw_input.csv"
+        filename: "raw_input.csv"
+      primary: true
+
+clean:
+  read:
+    source: auto
+    mode: latest
+    delim: ";"
+    encoding: "utf-8"
+    header: true
+  sql: "sql/clean.sql"
+  required_columns: [anno, semestre, distretto, tipologia_organismo, natura, iscritti, totale_definiti, pendenti_finali]
+  validate:
+    min_rows: 8000
+    not_null:
+      - anno
+      - semestre
+      - distretto
+      - tipologia_organismo
+      - natura
+
+mart:
+  tables:
+    - name: "mediazione_civile"
+      sql: "sql/mart.sql"
+    - name: "mart_nazionale_trend"
+      sql: "sql/mart_nazionale_trend.sql"
+  required_tables:
+    - "mediazione_civile"
+    - "mart_nazionale_trend"
+  validate:
+    table_rules:
+      mediazione_civile:
+        primary_key: [anno, semestre, distretto, tipologia_organismo, natura]
+        min_rows: 8000
+      mart_nazionale_trend:
+        primary_key: [anno, semestre, tipologia_organismo]
+        min_rows: 10
+
+validation:
+  fail_on_error: true
