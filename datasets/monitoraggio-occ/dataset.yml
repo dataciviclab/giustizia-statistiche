@@ -1,0 +1,68 @@
+# Candidate: monitoraggio-occ (issue #5)
+# Fonte: Ministero della Giustizia - DG Statistica
+# URL: https://datiestatistiche.giustizia.it/page/it/organismi-della-crisi-sovraindebitamento-occ
+# File: Monitoraggio_OCC.csv (delimitatore ;)
+# Copertura: 2024-2025. Grano: anno × macro_area × distretto × tipologia.
+# NOTA: Genova è spezzata su Nord + Centro (quota La Spezia) — il distretto
+#       può attraversare le macro-aree; la PK include macro_area.
+
+root: "../../out"
+schema_version: 1
+
+dataset:
+  name: "monitoraggio_occ"
+  source_id: "giustizia_statistiche"
+  tags: [giustizia, sovraindebitamento, occ, flussi, statistiche-giudiziarie]
+  category: giustizia
+  years: [2025]
+  time_coverage:
+    start_year: 2024
+    end_year: 2025
+
+raw:
+  output_policy: overwrite
+  sources:
+    - name: "monitoraggio_occ_csv"
+      type: "http_file"
+      args:
+        url: "https://datiestatistiche.giustizia.it/cmsresources/cms/documents/Monitoraggio_OCC.csv"
+        filename: "Monitoraggio_OCC.csv"
+      primary: true
+
+clean:
+  sql: "sql/clean.sql"
+  read:
+    source: auto
+    mode: latest
+    delim: ";"
+    encoding: "utf-8"
+    header: true
+  required_columns: [anno, macro_area, distretto, tipologia_procedimento, pendenti_iniziali, iscritti, definiti, pendenti_finali]
+  validate:
+    min_rows: 200
+    not_null:
+      - anno
+      - macro_area
+      - distretto
+      - tipologia_procedimento
+
+mart:
+  tables:
+    - name: "monitoraggio_occ"
+      sql: "sql/mart.sql"
+    - name: "mart_nazionale_trend"
+      sql: "sql/mart_nazionale_trend.sql"
+  required_tables:
+    - "monitoraggio_occ"
+    - "mart_nazionale_trend"
+  validate:
+    table_rules:
+      monitoraggio_occ:
+        primary_key: [anno, macro_area, distretto, tipologia_procedimento]
+        min_rows: 200
+      mart_nazionale_trend:
+        primary_key: [anno, tipologia_procedimento]
+        min_rows: 8
+
+validation:
+  fail_on_error: true
