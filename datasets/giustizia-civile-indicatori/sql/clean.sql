@@ -9,7 +9,8 @@ SELECT
     normalize_string("Fonte") AS fonte,
     normalize_string("Tipo ufficio") AS tipo_ufficio,
     normalize_string("Distretto") AS distretto,
-    normalize_string("Sede") AS sede,
+    CASE WHEN normalize_string("Sede") = 'Bolzano/Bozen' THEN 'Bolzano'
+         ELSE normalize_string("Sede") END AS sede,
     normalize_string("Macromateria") AS macromateria,
     normalize_string("Materia") AS materia,
     cast_double("Clearance rate") AS clearance_rate,

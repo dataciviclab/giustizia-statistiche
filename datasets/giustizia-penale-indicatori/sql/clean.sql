@@ -6,8 +6,16 @@
 SELECT
     cast_int("Anno") AS anno,
     normalize_string("Tipo ufficio") AS tipo_ufficio,
-    normalize_string("Distretto") AS distretto,
-    normalize_string("Sede") AS sede,
+    -- 3 sedi minorenni hanno la sede nel campo distretto (non sono distretti
+    -- reali): riassegnate al distretto parente della Corte d'Appello.
+    CASE normalize_string("Distretto")
+        WHEN 'Bolzano/Bozen' THEN 'Trento'
+        WHEN 'Sassari' THEN 'Cagliari'
+        WHEN 'Taranto' THEN 'Lecce'
+        ELSE normalize_string("Distretto")
+    END AS distretto,
+    CASE WHEN normalize_string("Sede") = 'Bolzano/Bozen' THEN 'Bolzano'
+         ELSE normalize_string("Sede") END AS sede,
     normalize_string("Sezione") AS sezione,
     cast_double("Clearance rate") AS clearance_rate,
     cast_double("Disposition time") AS disposition_time_gg

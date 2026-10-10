@@ -7,7 +7,9 @@ SELECT
     normalize_string("Ufficio") AS tipo_ufficio,
     normalize_string("Sezione") AS sezione,
     normalize_string("Distretto") AS distretto,
-    normalize_string("Circondario/Sede") AS sede,
+    -- Bolzano/Bozen (fonte) → Bolzano: canone con civile_flussi e gli altri dataset
+    CASE WHEN normalize_string("Circondario/Sede") = 'Bolzano/Bozen' THEN 'Bolzano'
+         ELSE normalize_string("Circondario/Sede") END AS sede,
     cast_int("Sopravvenuti") AS sopravvenuti,
     cast_int("Definiti") AS definiti_totale,
     cast_int("Pendenti Finali") AS pendenti_finali
