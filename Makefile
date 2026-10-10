@@ -1,6 +1,6 @@
 TOOLKIT = toolkit
 
-DATASETS := $(shell find datasets -name dataset.yml 2>/dev/null | sort)
+DATASETS := $(shell find datasets compose -name dataset.yml 2>/dev/null | sort)
 
 .PHONY: check run run-all clean registry help
 
@@ -15,7 +15,8 @@ run:
 	$(TOOLKIT) run
 
 run-all:
-	@find datasets -name dataset.yml | sort > .tmp_batch.txt; \
+	@find datasets compose -name dataset.yml | sort | grep -v compose/ > .tmp_batch.txt; \
+	find compose -name dataset.yml 2>/dev/null | sort >> .tmp_batch.txt; \
 	TOOLKIT_ALLOW_SCRIPT_SOURCE=1 $(TOOLKIT) run --batch .tmp_batch.txt; \
 	rm -f .tmp_batch.txt
 

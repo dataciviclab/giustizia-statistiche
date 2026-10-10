@@ -1,0 +1,102 @@
+root: ../../out
+schema_version: 1
+
+dataset:
+  name: quadro_distretto
+  source_id: dataciviclab_composite
+  tags: [giustizia, compose, quadro, distretto, cross]
+  category: giustizia
+  description: >-
+    Compose giustizia penale/civile: per distretto (snapshot 2025) -
+    flussi civile e penale, clearance e disposition time, quota penale
+    oltre 2 anni, spesa erario, pendenti PNRR vs target 2026.
+  years: [2025]
+  time_coverage:
+    mode: snapshot
+
+# Compose: unisce i clean/mart dei dataset del repo a livello distretto.
+# Grano: anno × distretto (26 distretti, snapshot 2025).
+# Eseguire prima: toolkit run per i dataset singoli in datasets/.
+
+raw:
+  output_policy: overwrite
+  sources:
+    - name: civile_flussi
+      type: local_file
+      args:
+        path: "../../out/data/mart/civile_flussi/2025/mart_summary.parquet"
+        filename: civile_flussi.parquet
+      primary: true
+
+support:
+  - type: dataset
+    name: penale_flussi
+    config: ../../datasets/penale-flussi/dataset.yml
+    years: [2025]
+  - type: dataset
+    name: giustizia_civile_indicatori
+    config: ../../datasets/giustizia-civile-indicatori/dataset.yml
+    years: [2025]
+  - type: dataset
+    name: giustizia_penale_indicatori
+    config: ../../datasets/giustizia-penale-indicatori/dataset.yml
+    years: [2025]
+  - type: dataset
+    name: durata_penale_classi
+    config: ../../datasets/durata-penale-classi/dataset.yml
+    years: [2025]
+  - type: dataset
+    name: spese_giustizia
+    config: ../../datasets/spese-giustizia/dataset.yml
+    years: [2025]
+  - type: dataset
+    name: monitoraggio_pnrr_giustizia
+    config: ../../datasets/monitoraggio-pnrr-giustizia/dataset.yml
+    years: [2026]
+
+clean:
+  sql: "sql/clean.sql"
+  read:
+    source: config_only
+    mode: latest
+  required_columns:
+    - anno
+    - distretto
+    - civ_sopravvenuti
+    - civ_definiti
+    - civ_pendenti
+    - pen_definiti
+    - civ_clearance
+    - pen_clearance
+    - quota_penale_oltre_2anni
+    - spesa_totale
+    - pnrr_pendenti
+    - pnrr_target_2026
+  validate:
+    not_null:
+      - anno
+      - distretto
+    min_rows: 25
+
+mart:
+  tables:
+    - name: mart_quadro
+      sql: "sql/mart_quadro.sql"
+    - name: mart_nazionale
+      sql: "sql/mart_nazionale.sql"
+  required_tables:
+    - mart_quadro
+    - mart_nazionale
+  validate:
+    table_rules:
+      mart_quadro:
+        primary_key: [anno, distretto]
+        min_rows: 25
+      mart_nazionale:
+        min_rows: 1
+
+duckdb:
+  memory_limit: "2GB"
+
+validation:
+  fail_on_error: true

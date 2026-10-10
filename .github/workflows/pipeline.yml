@@ -24,7 +24,7 @@ jobs:
     with:
       repo-slug: "giustizia-statistiche"
       run-command: "make run-all"
-      detect-paths: "datasets"
+      detect-paths: "datasets compose"
     permissions:
       contents: write
       pull-requests: write
