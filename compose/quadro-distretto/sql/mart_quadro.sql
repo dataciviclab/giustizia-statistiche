@@ -25,6 +25,10 @@ SELECT
     pnrr_cohort_baseline_2026,
     ROUND(pnrr_cohort_2026 * 100.0 / NULLIF(pnrr_cohort_baseline_2026, 0), 1)
         AS pnrr_cohort_pct_residuo,
-    (pnrr_cohort_2026 <= pnrr_cohort_baseline_2026 * 0.10) AS pnrr_sotto_target_2026
+    (pnrr_cohort_2026 <= pnrr_cohort_baseline_2026 * 0.10) AS pnrr_sotto_target_2026,
+    sorv_concesse,
+    sorv_revocate,
+    sorv_revoca_pct,
+    sorv_stock_alternative
 FROM clean_input
 ORDER BY distretto

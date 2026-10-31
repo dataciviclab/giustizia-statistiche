@@ -53,6 +53,14 @@ support:
     name: monitoraggio_pnrr_giustizia
     config: ../../datasets/monitoraggio-pnrr-giustizia/dataset.yml
     years: [2026]
+  - type: dataset
+    name: sorveglianza_misure
+    config: ../../datasets/sorveglianza-misure/dataset.yml
+    years: [2025]
+  - type: dataset
+    name: sorveglianza_esecuzione
+    config: ../../datasets/sorveglianza-esecuzione/dataset.yml
+    years: [2025]
 
 clean:
   sql: "sql/clean.sql"
@@ -73,6 +81,9 @@ clean:
     - pnrr_pendenti
     - pnrr_cohort_2026
     - pnrr_cohort_baseline_2026
+    - sorv_concesse
+    - sorv_revocate
+    - sorv_stock_alternative
   validate:
     not_null:
       - anno

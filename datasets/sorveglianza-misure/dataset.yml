@@ -1,0 +1,77 @@
+# Candidate: sorveglianza-misure (issue #18)
+# Fonte: Ministero della Giustizia — Direzione Generale di Statistica e Analisi Organizzativa
+# URL: https://datiestatistiche.giustizia.it/it/sorveglianza.page
+# File: Sorveglianza_misure_dati.csv (delimitatore ';', UTF-8 BOM)
+# Copertura: 2020-2025, semestrale, 58 sedi / 26 distretti.
+# NOTA: la colonna "Semestre" contiene anche il valore "Anno" (totale annuale).
+#       Le righe sono mantenute e distinte da periodo_tipo: sommare senza filtro raddoppia i totali.
+
+root: "../../out"
+schema_version: 1
+
+dataset:
+  name: "sorveglianza_misure"
+  source_id: "giustizia_statistiche"
+  tags: [giustizia, penale, sorveglianza, misure-alternative, statistiche-giudiziarie]
+  category: giustizia
+  years: [2025]
+  time_coverage:
+    start_year: 2020
+    end_year: 2025
+
+raw:
+  output_policy: overwrite
+  sources:
+    - name: "sorveglianza_misure_csv"
+      type: "http_file"
+      args:
+        url: "https://datiestatistiche.giustizia.it/cmsresources/cms/documents/Sorveglianza_misure_dati.csv"
+        filename: "Sorveglianza_misure_dati.csv"
+      primary: true
+
+clean:
+  sql: "sql/clean.sql"
+  read:
+    source: auto
+    mode: latest
+    delim: ";"
+    encoding: "utf-8"
+    header: true
+    all_varchar: true
+  required_columns:
+    - anno
+    - periodo_tipo
+    - semestre
+    - tipo_ufficio
+    - distretto
+    - sede
+    - misura
+    - oggetto
+    - natura_misura
+    - provvedimenti
+  validate:
+    min_rows: 40000
+    not_null:
+      - anno
+      - periodo_tipo
+      - tipo_ufficio
+      - distretto
+      - sede
+      - misura
+      - oggetto
+      - provvedimenti
+
+mart:
+  tables:
+    - name: "sorveglianza_misure"
+      sql: "sql/mart.sql"
+  required_tables:
+    - "sorveglianza_misure"
+  validate:
+    table_rules:
+      sorveglianza_misure:
+        primary_key: [anno, distretto, misura]
+        min_rows: 500
+
+validation:
+  fail_on_error: true
