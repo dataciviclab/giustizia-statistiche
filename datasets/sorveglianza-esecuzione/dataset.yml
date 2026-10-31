@@ -1,0 +1,73 @@
+# Candidate: sorveglianza-esecuzione (issue #18)
+# Fonte: Ministero della Giustizia — Direzione Generale di Statistica e Analisi Organizzativa
+# URL: https://datiestatistiche.giustizia.it/it/sorveglianza.page
+# File: Sorveglianza_misure_esecuzione_dati.csv (delimitatore ';', UTF-8 BOM)
+# Copertura: 2020-2025, 58 sedi / 26 distretti.
+# NOTA: "Aperte nel periodo" = flusso, "Aperte a fine periodo" = stock al 31/12.
+#       Lo stock mescola misure alternative, sostitutive e cautelari: usare natura_misura.
+
+root: "../../out"
+schema_version: 1
+
+dataset:
+  name: "sorveglianza_esecuzione"
+  source_id: "giustizia_statistiche"
+  tags: [giustizia, penale, sorveglianza, misure-alternative, esecuzione-penale, statistiche-giudiziarie]
+  category: giustizia
+  years: [2025]
+  time_coverage:
+    start_year: 2020
+    end_year: 2025
+
+raw:
+  output_policy: overwrite
+  sources:
+    - name: "sorveglianza_esecuzione_csv"
+      type: "http_file"
+      args:
+        url: "https://datiestatistiche.giustizia.it/cmsresources/cms/documents/Sorveglianza_misure_esecuzione_dati.csv"
+        filename: "Sorveglianza_misure_esecuzione_dati.csv"
+      primary: true
+
+clean:
+  sql: "sql/clean.sql"
+  read:
+    source: auto
+    mode: latest
+    delim: ";"
+    encoding: "utf-8"
+    header: true
+  required_columns:
+    - anno
+    - tipologia
+    - tipo_ufficio
+    - distretto
+    - sede
+    - oggetto
+    - natura_misura
+    - provvedimenti
+  validate:
+    min_rows: 10000
+    not_null:
+      - anno
+      - tipologia
+      - tipo_ufficio
+      - distretto
+      - sede
+      - oggetto
+      - provvedimenti
+
+mart:
+  tables:
+    - name: "sorveglianza_esecuzione"
+      sql: "sql/mart.sql"
+  required_tables:
+    - "sorveglianza_esecuzione"
+  validate:
+    table_rules:
+      sorveglianza_esecuzione:
+        primary_key: [anno, distretto, tipologia, natura_misura]
+        min_rows: 100
+
+validation:
+  fail_on_error: true

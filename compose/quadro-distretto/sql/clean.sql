@@ -88,6 +88,27 @@ pnrr AS (
       AND periodo = 'Intero anno'
       AND anno = 2025
     GROUP BY anno, distretto
+),
+-- Sorveglianza: flusso (concessioni/revoche) e stock (misure alternative al 31/12).
+-- Il mart sorveglianza_misure contiene solo periodo_tipo='anno' (niente doppio conteggio semestri).
+-- Lo stock è filtrato su natura_misura='alternativa': senza filtro include sostitutive e cautelari.
+sorv AS (
+    SELECT
+        anno,
+        distretto,
+        SUM(CASE WHEN misura = 'Concesse' THEN provvedimenti ELSE 0 END) AS sorv_concesse,
+        SUM(CASE WHEN misura = 'Revocate' THEN provvedimenti ELSE 0 END) AS sorv_revocate
+    FROM read_parquet('{support.sorveglianza_misure.mart.sorveglianza_misure}')
+    GROUP BY anno, distretto
+),
+sorv_stock AS (
+    SELECT
+        anno,
+        distretto,
+        SUM(provvedimenti) FILTER (WHERE natura_misura = 'alternativa') AS sorv_stock_alternative
+    FROM read_parquet('{support.sorveglianza_esecuzione.mart.sorveglianza_esecuzione}')
+    WHERE tipologia = 'stock'
+    GROUP BY anno, distretto
 )
 SELECT
     c.anno,
@@ -106,7 +127,11 @@ SELECT
     s.spesa_totale,
     pn.pnrr_pendenti,
     pn.pnrr_cohort_2026,
-    pn.pnrr_cohort_baseline_2026
+    pn.pnrr_cohort_baseline_2026,
+    so.sorv_concesse,
+    so.sorv_revocate,
+    ROUND(100.0 * so.sorv_revocate / NULLIF(so.sorv_concesse, 0), 1) AS sorv_revoca_pct,
+    st.sorv_stock_alternative
 FROM civ c
 LEFT JOIN pen p ON c.anno = p.anno AND c.distretto = p.distretto
 LEFT JOIN civ_ind ci ON c.anno = ci.anno AND c.distretto = ci.distretto
@@ -114,4 +139,6 @@ LEFT JOIN pen_ind pi ON c.anno = pi.anno AND c.distretto = pi.distretto
 LEFT JOIN durata d ON c.anno = d.anno AND c.distretto = d.distretto
 LEFT JOIN spesa s ON c.anno = s.anno AND c.distretto = s.distretto
 LEFT JOIN pnrr pn ON c.anno = pn.anno AND c.distretto = pn.distretto
+LEFT JOIN sorv so ON c.anno = so.anno AND c.distretto = so.distretto
+LEFT JOIN sorv_stock st ON c.anno = st.anno AND c.distretto = st.distretto
 ORDER BY c.distretto
