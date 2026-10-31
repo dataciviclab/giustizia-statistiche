@@ -12,6 +12,7 @@
 2. **BOM UTF-8**: reader DuckDB con `encoding: utf-8` (non `utf-8-sig`).
 3. **`Misura` è costante** (`In esecuzione`): scartata nel clean.
 4. **Natura eterogenea**: lo stock contiene misure alternative, sostitutive (libertà controllata) e cautelari (arresti domiciliari). La mappa `natura_misura` usa pattern `LIKE` ed è **duplicata** in `sorveglianza-misure/sql/clean.sql`: se cambia in un file va cambiata nell'altro (il contratto clean non espone macro condivise).
+5. **Il lavoro esterno (art. 21 O.P.) non compare in questo file**: la fonte non lo traccia nello stock, anche se nel file `sorveglianza-misure` è classificato come `alternativa`. Il confronto flusso/stok su quella voce non è possibile con i dati pubblicati.
 
 ## Numeri di controllo (2025, `tipologia='stock'`)
 

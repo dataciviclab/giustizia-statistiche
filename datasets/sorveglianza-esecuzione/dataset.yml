@@ -37,6 +37,7 @@ clean:
     delim: ";"
     encoding: "utf-8"
     header: true
+    all_varchar: true
   required_columns:
     - anno
     - tipologia

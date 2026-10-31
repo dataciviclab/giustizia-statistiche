@@ -35,6 +35,7 @@ SELECT
           OR lower(normalize_string("Oggetto")) LIKE '%lavoro sostitutivo%'
           OR lower(normalize_string("Oggetto")) LIKE '%espulsione%' THEN 'sostitutiva'
         WHEN lower(normalize_string("Oggetto")) LIKE '%affidamento%'
+          OR lower(normalize_string("Oggetto")) LIKE '%lavoro esterno%'
           OR lower(normalize_string("Oggetto")) LIKE '%esecuzione presso domicilio%'
           OR lower(normalize_string("Oggetto")) LIKE '%detenzione domiciliare%'
           OR lower(normalize_string("Oggetto")) LIKE '%semilibert%'
