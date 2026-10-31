@@ -2,7 +2,7 @@
   "schema_version": 1,
   "repo": "giustizia-statistiche",
   "source_repo": "dataciviclab/giustizia-statistiche",
-  "updated_at": "2026-10-10",
+  "updated_at": "2026-10-31",
   "datasets": [
     {
       "slug": "civile_flussi",
@@ -1211,6 +1211,30 @@
           "type": "DOUBLE",
           "role": "metric",
           "description": ""
+        },
+        {
+          "name": "sorv_concesse",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "sorv_revocate",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "sorv_revoca_pct",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "sorv_stock_alternative",
+          "type": "DOUBLE",
+          "role": "metric",
+          "description": ""
         }
       ],
       "location": {
@@ -1222,6 +1246,177 @@
       "mart_refs": [
         "quadro_distretto__mart_quadro",
         "quadro_distretto__mart_nazionale"
+      ]
+    },
+    {
+      "slug": "sorveglianza_esecuzione",
+      "name": "Sorveglianza Esecuzione",
+      "description": "",
+      "source": "",
+      "source_id": "giustizia_statistiche",
+      "period": {
+        "start": 2020,
+        "end": 2025
+      },
+      "tags": [
+        "giustizia",
+        "penale",
+        "sorveglianza",
+        "misure-alternative",
+        "esecuzione-penale",
+        "statistiche-giudiziarie"
+      ],
+      "category": "giustizia",
+      "columns": [
+        {
+          "name": "anno",
+          "type": "INTEGER",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "year"
+        },
+        {
+          "name": "tipologia",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "tipo_ufficio",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "distretto",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "sede",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "oggetto",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "natura_misura",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "provvedimenti",
+          "type": "INTEGER",
+          "role": "metric",
+          "description": ""
+        }
+      ],
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-clean/giustizia-statistiche/sorveglianza_esecuzione/2025/sorveglianza_esecuzione_2025_clean.parquet",
+        "multi_file": false
+      },
+      "stage": "incubating",
+      "mart_refs": [
+        "sorveglianza_esecuzione__sorveglianza_esecuzione"
+      ]
+    },
+    {
+      "slug": "sorveglianza_misure",
+      "name": "Sorveglianza Misure",
+      "description": "",
+      "source": "",
+      "source_id": "giustizia_statistiche",
+      "period": {
+        "start": 2020,
+        "end": 2025
+      },
+      "tags": [
+        "giustizia",
+        "penale",
+        "sorveglianza",
+        "misure-alternative",
+        "statistiche-giudiziarie"
+      ],
+      "category": "giustizia",
+      "columns": [
+        {
+          "name": "anno",
+          "type": "INTEGER",
+          "role": "dimension",
+          "description": "",
+          "semantic_type": "year"
+        },
+        {
+          "name": "periodo_tipo",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "semestre",
+          "type": "INTEGER",
+          "role": "metric",
+          "description": ""
+        },
+        {
+          "name": "tipo_ufficio",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "distretto",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "sede",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "misura",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "oggetto",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "natura_misura",
+          "type": "VARCHAR",
+          "role": "dimension",
+          "description": ""
+        },
+        {
+          "name": "provvedimenti",
+          "type": "INTEGER",
+          "role": "metric",
+          "description": ""
+        }
+      ],
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-clean/giustizia-statistiche/sorveglianza_misure/2025/sorveglianza_misure_2025_clean.parquet",
+        "multi_file": false
+      },
+      "stage": "incubating",
+      "mart_refs": [
+        "sorveglianza_misure__sorveglianza_misure"
       ]
     },
     {
@@ -1736,6 +1931,26 @@
       }
     },
     {
+      "slug": "sorveglianza_esecuzione__sorveglianza_esecuzione",
+      "dataset": "sorveglianza_esecuzione",
+      "table": "sorveglianza_esecuzione",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/giustizia-statistiche/sorveglianza_esecuzione/2025/sorveglianza_esecuzione.parquet",
+        "multi_file": false
+      }
+    },
+    {
+      "slug": "sorveglianza_misure__sorveglianza_misure",
+      "dataset": "sorveglianza_misure",
+      "table": "sorveglianza_misure",
+      "location": {
+        "type": "gcs",
+        "path": "gs://dataciviclab-mart/giustizia-statistiche/sorveglianza_misure/2025/sorveglianza_misure.parquet",
+        "multi_file": false
+      }
+    },
+    {
       "slug": "spese_giustizia__mart_nazionale_trend",
       "dataset": "spese_giustizia",
       "table": "mart_nazionale_trend",
@@ -1805,7 +2020,7 @@
       "detail": "anno 2025 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20261010T142207Z_84811422",
+        "run_id": "20261031T150756Z_c5f2ec14",
         "year": 2025,
         "status": "SUCCESS",
         "quality_score": {
@@ -1818,13 +2033,13 @@
           "mart": 27
         },
         "output_bytes": {
-          "raw": 5963,
-          "clean": 4986,
-          "mart": 8858
+          "raw": 5971,
+          "clean": 5995,
+          "mart": 9867
         },
-        "started_at": "2026-10-10T14:22:07.282229+00:00",
-        "finished_at": "2026-10-10T14:22:07.443474+00:00",
-        "duration_seconds": 0.161
+        "started_at": "2026-10-31T15:07:56.801415+00:00",
+        "finished_at": "2026-10-31T15:07:56.966485+00:00",
+        "duration_seconds": 0.165
       }
     },
     {
@@ -1835,7 +2050,7 @@
       "detail": "anno 2025 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20261010T142035Z_c497fa97",
+        "run_id": "20261031T150617Z_e983f8bf",
         "year": 2025,
         "status": "SUCCESS",
         "quality_score": {
@@ -1850,11 +2065,11 @@
         "output_bytes": {
           "raw": 6716220,
           "clean": 698682,
-          "mart": 5963
+          "mart": 5971
         },
-        "started_at": "2026-10-10T14:20:35.137487+00:00",
-        "finished_at": "2026-10-10T14:20:56.623380+00:00",
-        "duration_seconds": 21.486
+        "started_at": "2026-10-31T15:06:17.601672+00:00",
+        "finished_at": "2026-10-31T15:06:44.148594+00:00",
+        "duration_seconds": 26.547
       }
     },
     {
@@ -1865,7 +2080,7 @@
       "detail": "anno 2025 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20261010T142056Z_847e88a6",
+        "run_id": "20261031T150644Z_5106cf0b",
         "year": 2025,
         "status": "SUCCESS",
         "quality_score": {
@@ -1881,11 +2096,11 @@
         "output_bytes": {
           "raw": 2007960,
           "clean": 129899,
-          "mart": 88934
+          "mart": 88973
         },
-        "started_at": "2026-10-10T14:20:56.667741+00:00",
-        "finished_at": "2026-10-10T14:21:01.141989+00:00",
-        "duration_seconds": 4.474
+        "started_at": "2026-10-31T15:06:44.192017+00:00",
+        "finished_at": "2026-10-31T15:06:48.156234+00:00",
+        "duration_seconds": 3.964
       }
     },
     {
@@ -1896,7 +2111,7 @@
       "detail": "anno 2025 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20261010T142103Z_7fd96147",
+        "run_id": "20261031T150649Z_22d56c7e",
         "year": 2025,
         "status": "SUCCESS",
         "quality_score": {
@@ -1914,9 +2129,9 @@
           "clean": 91069,
           "mart": 132945
         },
-        "started_at": "2026-10-10T14:21:03.644973+00:00",
-        "finished_at": "2026-10-10T14:21:07.317227+00:00",
-        "duration_seconds": 3.672
+        "started_at": "2026-10-31T15:06:49.756374+00:00",
+        "finished_at": "2026-10-31T15:06:52.331233+00:00",
+        "duration_seconds": 2.575
       }
     },
     {
@@ -1927,7 +2142,7 @@
       "detail": "anno 2025 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20261010T142109Z_2063c11b",
+        "run_id": "20261031T150654Z_c6aa2659",
         "year": 2025,
         "status": "SUCCESS",
         "quality_score": {
@@ -1945,9 +2160,9 @@
           "clean": 32410,
           "mart": 28409
         },
-        "started_at": "2026-10-10T14:21:09.777349+00:00",
-        "finished_at": "2026-10-10T14:21:13.065320+00:00",
-        "duration_seconds": 3.288
+        "started_at": "2026-10-31T15:06:54.035156+00:00",
+        "finished_at": "2026-10-31T15:06:56.324705+00:00",
+        "duration_seconds": 2.29
       }
     },
     {
@@ -1958,7 +2173,7 @@
       "detail": "anno 2025 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20261010T142113Z_64047b7d",
+        "run_id": "20261031T150656Z_0180ca77",
         "year": 2025,
         "status": "SUCCESS",
         "quality_score": {
@@ -1976,9 +2191,9 @@
           "clean": 412613,
           "mart": 25443
         },
-        "started_at": "2026-10-10T14:21:13.108792+00:00",
-        "finished_at": "2026-10-10T14:21:19.199176+00:00",
-        "duration_seconds": 6.09
+        "started_at": "2026-10-31T15:06:56.377836+00:00",
+        "finished_at": "2026-10-31T15:07:02.812526+00:00",
+        "duration_seconds": 6.435
       }
     },
     {
@@ -1989,7 +2204,7 @@
       "detail": "anno 2025 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20261010T142119Z_fff46235",
+        "run_id": "20261031T150702Z_1be23428",
         "year": 2025,
         "status": "SUCCESS",
         "quality_score": {
@@ -2005,11 +2220,11 @@
         "output_bytes": {
           "raw": 914617,
           "clean": 134619,
-          "mart": 60613
+          "mart": 60570
         },
-        "started_at": "2026-10-10T14:21:19.250948+00:00",
-        "finished_at": "2026-10-10T14:21:21.669515+00:00",
-        "duration_seconds": 2.419
+        "started_at": "2026-10-31T15:07:02.872942+00:00",
+        "finished_at": "2026-10-31T15:07:05.144096+00:00",
+        "duration_seconds": 2.271
       }
     },
     {
@@ -2020,7 +2235,7 @@
       "detail": "anno 2025 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20261010T142122Z_82c0444a",
+        "run_id": "20261031T150705Z_093f0b90",
         "year": 2025,
         "status": "SUCCESS",
         "quality_score": {
@@ -2035,11 +2250,11 @@
         "output_bytes": {
           "raw": 213981,
           "clean": 8386,
-          "mart": 5416
+          "mart": 5418
         },
-        "started_at": "2026-10-10T14:21:22.215040+00:00",
-        "finished_at": "2026-10-10T14:21:23.668066+00:00",
-        "duration_seconds": 1.453
+        "started_at": "2026-10-31T15:07:05.547567+00:00",
+        "finished_at": "2026-10-31T15:07:06.705986+00:00",
+        "duration_seconds": 1.158
       }
     },
     {
@@ -2050,7 +2265,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20261010T142123Z_7158dd86",
+        "run_id": "20261031T150706Z_459ad834",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -2068,9 +2283,9 @@
           "clean": 58931,
           "mart": 71045
         },
-        "started_at": "2026-10-10T14:21:23.708774+00:00",
-        "finished_at": "2026-10-10T14:21:26.558256+00:00",
-        "duration_seconds": 2.849
+        "started_at": "2026-10-31T15:07:06.760443+00:00",
+        "finished_at": "2026-10-31T15:07:08.908025+00:00",
+        "duration_seconds": 2.148
       }
     },
     {
@@ -2081,7 +2296,7 @@
       "detail": "anno 2025 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20261010T142127Z_a1b3b28f",
+        "run_id": "20261031T150709Z_6cca13b8",
         "year": 2025,
         "status": "SUCCESS",
         "quality_score": {
@@ -2090,17 +2305,17 @@
           "mart": 100
         },
         "output_rows": {
-          "clean": 144490,
-          "mart": 2392
+          "clean": 146291,
+          "mart": 2418
         },
         "output_bytes": {
-          "raw": 7358232,
-          "clean": 423655,
-          "mart": 24902
+          "raw": 7452002,
+          "clean": 428266,
+          "mart": 25130
         },
-        "started_at": "2026-10-10T14:21:27.083938+00:00",
-        "finished_at": "2026-10-10T14:21:51.987722+00:00",
-        "duration_seconds": 24.904
+        "started_at": "2026-10-31T15:07:09.321662+00:00",
+        "finished_at": "2026-10-31T15:07:38.636047+00:00",
+        "duration_seconds": 29.314
       }
     },
     {
@@ -2111,7 +2326,7 @@
       "detail": "anno 2025 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20261010T142153Z_55683937",
+        "run_id": "20261031T150739Z_a868841a",
         "year": 2025,
         "status": "SUCCESS",
         "quality_score": {
@@ -2129,9 +2344,9 @@
           "clean": 6927,
           "mart": 9731
         },
-        "started_at": "2026-10-10T14:21:53.722191+00:00",
-        "finished_at": "2026-10-10T14:21:54.538527+00:00",
-        "duration_seconds": 0.816
+        "started_at": "2026-10-31T15:07:39.901455+00:00",
+        "finished_at": "2026-10-31T15:07:40.511486+00:00",
+        "duration_seconds": 0.61
       }
     },
     {
@@ -2142,7 +2357,7 @@
       "detail": "anno 2026 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20261010T142154Z_f975037f",
+        "run_id": "20261031T150740Z_cd381dbd",
         "year": 2026,
         "status": "SUCCESS",
         "quality_score": {
@@ -2160,9 +2375,9 @@
           "clean": 27419,
           "mart": 36237
         },
-        "started_at": "2026-10-10T14:21:54.589520+00:00",
-        "finished_at": "2026-10-10T14:21:57.032001+00:00",
-        "duration_seconds": 2.442
+        "started_at": "2026-10-31T15:07:40.563912+00:00",
+        "finished_at": "2026-10-31T15:07:42.528231+00:00",
+        "duration_seconds": 1.964
       }
     },
     {
@@ -2173,7 +2388,7 @@
       "detail": "anno 2025 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20261010T142157Z_5ee8359b",
+        "run_id": "20261031T150742Z_610248ed",
         "year": 2025,
         "status": "SUCCESS",
         "quality_score": {
@@ -2190,9 +2405,71 @@
           "clean": 103093,
           "mart": 19745
         },
-        "started_at": "2026-10-10T14:21:57.613387+00:00",
-        "finished_at": "2026-10-10T14:22:00.969988+00:00",
-        "duration_seconds": 3.357
+        "started_at": "2026-10-31T15:07:42.947332+00:00",
+        "finished_at": "2026-10-31T15:07:45.901051+00:00",
+        "duration_seconds": 2.954
+      }
+    },
+    {
+      "id": "sorveglianza_esecuzione",
+      "source_id": "giustizia_statistiche",
+      "status": "ok",
+      "label": "sorveglianza_esecuzione",
+      "detail": "anno 2025 — mart: si",
+      "action": "",
+      "run": {
+        "run_id": "20261031T150747Z_f24d4a8b",
+        "year": 2025,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 11148,
+          "clean": 11148,
+          "mart": 1248
+        },
+        "output_bytes": {
+          "raw": 1495897,
+          "clean": 17106,
+          "mart": 3831
+        },
+        "started_at": "2026-10-31T15:07:47.331278+00:00",
+        "finished_at": "2026-10-31T15:07:48.467704+00:00",
+        "duration_seconds": 1.136
+      }
+    },
+    {
+      "id": "sorveglianza_misure",
+      "source_id": "giustizia_statistiche",
+      "status": "ok",
+      "label": "sorveglianza_misure",
+      "detail": "anno 2025 — mart: si",
+      "action": "",
+      "run": {
+        "run_id": "20261031T150749Z_6fa0b958",
+        "year": 2025,
+        "status": "SUCCESS",
+        "quality_score": {
+          "raw": 100,
+          "clean": 100,
+          "mart": 100
+        },
+        "output_rows": {
+          "raw": 45411,
+          "clean": 45411,
+          "mart": 780
+        },
+        "output_bytes": {
+          "raw": 6142713,
+          "clean": 29806,
+          "mart": 2537
+        },
+        "started_at": "2026-10-31T15:07:49.949102+00:00",
+        "finished_at": "2026-10-31T15:07:51.722046+00:00",
+        "duration_seconds": 1.773
       }
     },
     {
@@ -2203,7 +2480,7 @@
       "detail": "anno 2025 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20261010T142201Z_28138923",
+        "run_id": "20261031T150752Z_b5ef60fe",
         "year": 2025,
         "status": "SUCCESS",
         "quality_score": {
@@ -2220,9 +2497,9 @@
           "clean": 37982,
           "mart": 11525
         },
-        "started_at": "2026-10-10T14:22:01.508802+00:00",
-        "finished_at": "2026-10-10T14:22:03.116456+00:00",
-        "duration_seconds": 1.608
+        "started_at": "2026-10-31T15:07:52.146606+00:00",
+        "finished_at": "2026-10-31T15:07:53.561887+00:00",
+        "duration_seconds": 1.415
       }
     },
     {
@@ -2233,7 +2510,7 @@
       "detail": "anno 2025 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20261010T142203Z_8aa198ce",
+        "run_id": "20261031T150753Z_dd9b77a7",
         "year": 2025,
         "status": "SUCCESS",
         "quality_score": {
@@ -2251,9 +2528,9 @@
           "clean": 12168,
           "mart": 19113
         },
-        "started_at": "2026-10-10T14:22:03.166773+00:00",
-        "finished_at": "2026-10-10T14:22:04.949564+00:00",
-        "duration_seconds": 1.783
+        "started_at": "2026-10-31T15:07:53.615087+00:00",
+        "finished_at": "2026-10-31T15:07:55.055585+00:00",
+        "duration_seconds": 1.44
       }
     },
     {
@@ -2264,7 +2541,7 @@
       "detail": "anno 2025 — mart: si",
       "action": "",
       "run": {
-        "run_id": "20261010T142206Z_eff96286",
+        "run_id": "20261031T150756Z_cf0dc442",
         "year": 2025,
         "status": "SUCCESS",
         "quality_score": {
@@ -2282,9 +2559,9 @@
           "clean": 3689,
           "mart": 4485
         },
-        "started_at": "2026-10-10T14:22:06.267562+00:00",
-        "finished_at": "2026-10-10T14:22:07.202373+00:00",
-        "duration_seconds": 0.935
+        "started_at": "2026-10-31T15:07:56.048223+00:00",
+        "finished_at": "2026-10-31T15:07:56.711580+00:00",
+        "duration_seconds": 0.663
       }
     }
   ],
@@ -2401,6 +2678,18 @@
             "semantic_type": "year"
           },
           {
+            "slug": "sorveglianza_esecuzione",
+            "name": "Sorveglianza Esecuzione",
+            "column": "anno",
+            "semantic_type": "year"
+          },
+          {
+            "slug": "sorveglianza_misure",
+            "name": "Sorveglianza Misure",
+            "column": "anno",
+            "semantic_type": "year"
+          },
+          {
             "slug": "spese_giustizia",
             "name": "Spese Giustizia",
             "column": "anno",
@@ -2420,7 +2709,7 @@
           }
         ],
         "types": {
-          "year": 16,
+          "year": 18,
           "month": 2
         }
       }
